@@ -1,0 +1,67 @@
+* {
+    font-family: 'Krona One', sans-serif;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+html,
+body {
+    margin: 0;
+    background-color: rgb(241, 241, 241);
+}
+
+.branding-container {
+    width: 100%;
+}
+
+.branding {
+    text-align: center;
+    background-color: black;
+    display: block;
+    width: fit-content;
+    color: white;
+    padding: 1rem 5rem;
+    font-size: 2.5rem;
+    margin: 4rem auto;
+    font-weight: 800;
+    text-transform: capitalize;
+    border-radius: 1rem;
+}
+
+nav {
+    width: 100%;
+}
+
+nav>ul {
+    padding: 0;
+    display: flex;
+    list-style-type: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+nav>ul>li {
+    padding: 1rem 1rem;
+}
+
+.shape {
+    width: 50rem;
+    height: 50rem;
+    display: block;
+    position: absolute;
+    background-color: black;
+    transform: rotate(31deg);
+    border-radius: 5rem;
+}
+
+.shape.left {
+    left: -30rem;
+}
+
+.shape.right {
+    right: -30rem;
+}
