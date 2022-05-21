@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Fahkwang
+- Font Author: Copyright 2018 The Fahkwang Project Authors (https://github.com/cadsondemak/Fah-Kwang)
+- Font Source: http://fonts.gstatic.com/s/fahkwang/v16/Noa06Uj3zpmBOgbNpOqNgAVUHC5Tlhjxdw4.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
