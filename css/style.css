@@ -13,24 +13,6 @@ body {
     background-color: rgb(241, 241, 241);
 }
 
-.branding-container {
-    width: 100%;
-}
-
-.branding {
-    text-align: center;
-    background-color: black;
-    display: block;
-    width: fit-content;
-    color: white;
-    padding: 1rem 5rem;
-    font-size: 2.5rem;
-    margin: 4rem auto;
-    font-weight: 800;
-    text-transform: capitalize;
-    border-radius: 1rem;
-}
-
 nav {
     width: 100%;
 }
@@ -48,20 +30,82 @@ nav>ul>li {
     padding: 1rem 1rem;
 }
 
-.shape {
-    width: 50rem;
-    height: 50rem;
+.hero-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20rem auto 10rem auto;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.hero-subtitle {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.about {
+    background-color: #273036;
+    color: #f1f1f1;
+}
+
+.about-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 12rem 0;
+}
+
+.about-container>.about-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0rem 8rem 10rem 8rem;
+    width: calc(100% - 16rem);
+}
+
+.about-container>.about-content {
+    font-size: 4rem;
+    margin: 0rem 8rem 0rem 8rem;
+    width: calc(100% - 16rem);
+    line-height: 8rem;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.wave {
+    width: 100%;
     display: block;
-    position: absolute;
-    background-color: black;
-    transform: rotate(31deg);
-    border-radius: 5rem;
 }
 
-.shape.left {
-    left: -30rem;
+ul.footer-list{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 6rem 0;
+    line-height: 3rem;
+    font-size: 1.2rem;
 }
 
-.shape.right {
-    right: -30rem;
+footer .spacer {
+    padding: 0 1rem;
+}
+
+footer li a .bi {
+    font-size: 2rem;
+}
+
+footer a {
+    padding: 0 1rem;
 }
