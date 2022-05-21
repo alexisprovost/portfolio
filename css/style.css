@@ -1,3 +1,7 @@
+/*
+* Par Alexis Provost
+*/
+
 :root {
     --bg-color: rgb(241, 241, 241);
     --link-color: #000;
@@ -29,6 +33,10 @@ body {
     margin: 0;
     background-color: var(--bg-color);
 }
+
+/*
+* Nav
+*/
 
 nav {
     width: 100%;
@@ -69,6 +77,10 @@ nav>ul>li>a:after {
 nav>ul>li>a:hover:after {
     width: 100%;
 }
+
+/*
+* Main page style & sections
+*/
 
 .hero-container {
     width: 100%;
@@ -136,17 +148,9 @@ section .section-content {
     display: block;
 }
 
-ul.footer-list {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 6rem 0;
-    line-height: 3rem;
-    font-size: 1.2rem;
-}
+/*
+* Gallery
+*/
 
 .gallery-container ul {
     display: flex;
@@ -171,6 +175,10 @@ ul.footer-list {
 .gallery-container li:last-child {
     flex-grow: 10;
 }
+
+/*
+* Contact
+*/
 
 .contact-container .section-title {
     margin: 0rem 8rem 6rem 8rem;
@@ -228,6 +236,10 @@ ul.footer-list {
     background-color: var(--button-color-hover);
 }
 
+/*
+* Footer
+*/
+
 footer .spacer {
     padding: 0 1rem;
 }
@@ -244,6 +256,18 @@ footer li a .bi:hover {
 
 footer a {
     padding: 0 1rem;
+}
+
+ul.footer-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 6rem 0;
+    line-height: 3rem;
+    font-size: 1.2rem;
 }
 
 /* Scroll Bar */
@@ -269,3 +293,126 @@ footer a {
 
 /* Media for screen types */
 
+@media screen and (max-width: 768px) {
+
+    /* Nav Bar */
+    nav>ul {
+        flex-direction: column;
+    }
+
+    /* Main Page */
+    .hero-container {
+        margin: 6rem auto 4rem auto;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    section .section-title {
+        font-size: 2rem;
+        margin: 0 2rem 4rem 2rem;
+        width: calc(100% - 4rem);
+    }
+
+    section .section-content {
+        font-size: 1rem;
+        margin: 0rem 2rem 0rem 2rem;
+        width: calc(100% - 4rem);
+        line-height: 2rem;
+    }
+
+    .about-container {
+        padding: 0 0 4rem 0;
+    }
+
+    ul.footer-list {
+        flex-direction: column;
+        margin: 2rem 0 4rem 0;
+        font-size: 0.8rem;
+    }
+
+    ul.footer-list>.spacer {
+        display: none;
+    }
+
+    /* Gallery */
+    .gallery-container ul {
+        padding: 0 0 8rem 0;
+        margin: 0 2rem;
+        width: calc(100% - 4rem);
+    }
+
+    /* Contact Page */
+    .contact-container .section-title {
+        margin: 0 2rem 4rem 2rem;
+    }
+
+    .contact-container form {
+        width: calc(100% - 2rem);
+    }
+
+    /* hamburger nav */
+
+}
+
+@media (max-width:1200px) and (min-width:768px) {
+
+    /* Main Page */
+    .hero-container {
+        margin: 6rem auto 4rem auto;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+        text-align: center;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    section .section-title {
+        font-size: 2.6rem;
+        margin: 0 2rem 4rem 2rem;
+        width: calc(100% - 4rem);
+    }
+
+    section .section-content {
+        font-size: 1.5rem;
+        margin: 0rem 2rem 0rem 2rem;
+        width: calc(100% - 4rem);
+        line-height: 2rem;
+    }
+
+    .about-container {
+        padding: 0 0 8rem 0;
+    }
+
+    /* Gallery */
+    .gallery-container ul {
+        padding: 0 0 8rem 0;
+        margin: 0 2rem;
+        width: calc(100% - 4rem);
+    }
+
+    /* Contact Page */
+    .contact-container .section-title {
+        margin: 0 2rem 4rem 2rem;
+    }
+
+    .contact-container form {
+        width: calc(100% - 6rem);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    /* Style utilisé dans le css de base */
+}
