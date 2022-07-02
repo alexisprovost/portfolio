@@ -5,9 +5,9 @@
 :root {
     --bg-color: rgb(241, 241, 241);
     --link-color: #000;
-    --link-hover-color: #edbd2c;
-    --nav-bottom-line-color: #edbd2c;
-    --section-color: #273036;
+    --link-hover-color: #4d5a67;
+    --nav-bottom-line-color: #293036;
+    --section-color: #2d4251;
     --button-color: rgb(75 93 105);
     --button-color-hover: #1a5880;
 }
@@ -294,7 +294,6 @@ footer li a .bi {
 
 footer li a .bi:hover {
     color: var(--link-hover-color);
-    -webkit-text-stroke: 1px black;
 }
 
 footer a {
