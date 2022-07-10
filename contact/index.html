@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexis - Mes Projets</title>
+    <title>Alexis - Me Contacter</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
@@ -34,15 +34,15 @@
                 <div class='nav-button'></div>
             </label>
             <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="projects.html">Mes Projets</a></li>
-                <li><a href="contact.html">Me Contacter</a></li>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/projects">Mes Projets</a></li>
+                <li><a href="/contact">Me Contacter</a></li>
             </ul>
         </nav>
 
         <section>
             <div class="animate__animated animate__fadeInUp animate__faster hero-container sub-page">
-                <h1 class="hero-title">Mes Projets</h1>
+                <h1 class="hero-title">Me Contacter</h1>
             </div>
         </section>
     </header>
@@ -55,29 +55,25 @@
                 </path>
             </svg>
 
-            <div class="gallery">
-                <div class="gallery-container">
-                    <h2 class="section-title">Cette Session</h2>
-                    <ul>
-                        <li>
-                            <img src="image/jeu-cplusplus.png" alt="Jeu de C++" loading="lazy">
-                        </li>
-                        <li>
-                            <img src="image/manage-biblio.png" alt="Manage Biblio" loading="lazy">
-                        </li>
-                    </ul>
-
-                    <h2 class="section-title right">Autre Projets</h2>
-                    <ul>
-                        <li>
-                            <img src="image/m19.ca-20201130.jpg"
-                                alt="M19 Instagram" loading="lazy">
-                        </li>
-                        <li>
-                            <img src="image/m19.ca-20191008.jpg"
-                                alt="M19 Instagram" loading="lazy">
-                        </li>
-                    </ul>
+            <div class="contact">
+                <div class="contact-container">
+                    <h2 class="section-title">Formulaire de contact</h2>
+                    <form action="mailto:alexis@provost.cloud" method="post">
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Votre email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="3"
+                                placeholder="Votre message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
                 </div>
             </div>
 
