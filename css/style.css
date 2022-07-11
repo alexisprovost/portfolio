@@ -78,49 +78,6 @@ nav>ul>li>a:hover:after {
     width: 100%;
 }
 
-/* hamburger */
-#nav-toggle {
-    display: none;
-}
-
-.nav-button,
-.nav-button::before,
-.nav-button::after {
-    display: none;
-    position: fixed;
-    background-color: rgb(0, 0, 0);
-    top: 2rem;
-    right: 1rem;
-    height: 4px;
-    width: 30px;
-    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-    border-radius: 2px;
-}
-
-.nav-button::before {
-    content: "";
-    margin-top: -8px;
-}
-
-.nav-button::after {
-    content: "";
-    margin-top: 8px;
-}
-
-#nav-toggle:checked+.nav-button-container .nav-button::before {
-    margin-top: 0px;
-    transform: rotate(405deg);
-}
-
-#nav-toggle:checked+.nav-button-container .nav-button {
-    background: rgba(255, 255, 255, 0);
-}
-
-#nav-toggle:checked+.nav-button-container .nav-button::after {
-    margin-top: 0px;
-    transform: rotate(-405deg);
-}
-
 /*
 * Main page style & sections
 */
@@ -340,7 +297,6 @@ ul.footer-list {
     /* Nav Bar */
     nav>ul {
         flex-direction: column;
-        display: none;
     }
 
     .nav-button,
