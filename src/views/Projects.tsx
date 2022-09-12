@@ -11,7 +11,7 @@ const Projects = () => {
 	return (
 		<div className="gallery">
 			<div className="gallery-container">
-				<h2 className="section-title">Cette Session</h2>
+				<h2 className="section-title">Derniers Projets</h2>
 				<ul>
 					<li>
 						<img src={jeucplusplus} alt="Jeu de C++" loading="lazy" />
