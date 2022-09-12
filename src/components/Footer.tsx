@@ -6,7 +6,7 @@ const Footer = () => {
 			<div className="footer-container">
 				<div className="footer-content">
 					<ul className="footer-list">
-						<li>Copyright Alexis Provost 2022</li>
+						<li>Copyright Alexis Provost {new Date().getFullYear()}</li>
 						<li className="spacer">|</li>
 						<li>Fait avec ReactJS</li>
 						<li className="spacer">|</li>
@@ -26,7 +26,7 @@ const Footer = () => {
 							</a>
 						</li>
 						<li>
-							<a href="https://www.instagram.com/m19.ca/" target="_blank">
+							<a href="https://www.instagram.com/alexis.provost/" target="_blank">
 								<Instagram />
 							</a>
 						</li>
