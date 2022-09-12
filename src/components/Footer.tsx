@@ -8,6 +8,8 @@ const Footer = () => {
 					<ul className="footer-list">
 						<li>Copyright Alexis Provost 2022</li>
 						<li className="spacer">|</li>
+						<li>Fait avec ReactJS</li>
+						<li className="spacer">|</li>
 						<li>
 							<a href="https://twitter.com/_alexis_provost" target="_blank">
 								<Twitter />
