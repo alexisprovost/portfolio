@@ -1,4 +1,8 @@
+import useDocumentTitle from "../hooks/useDocumentTitle";
+
 const Contact = () => {
+	useDocumentTitle("Me Contacter");
+
 	return (
 		<div className="contact">
 			<div className="contact-container">

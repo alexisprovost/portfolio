@@ -1,9 +1,13 @@
+import useDocumentTitle from "../hooks/useDocumentTitle";
+
 import jeucplusplus from "../assets/images/jeu-cplusplus.png";
 import managebiblio from "../assets/images/manage-biblio.png";
 import m19insta1 from "../assets/images/m19.ca-20191008.jpg";
 import m19insta2 from "../assets/images/m19.ca-20201130.jpg";
 
 const Projects = () => {
+	useDocumentTitle("Mes Projets");
+
 	return (
 		<div className="gallery">
 			<div className="gallery-container">

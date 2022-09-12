@@ -1,4 +1,8 @@
+import useDocumentTitle from "../hooks/useDocumentTitle";
+
 const Home = () => {
+	useDocumentTitle("Portfolio");
+
 	return (
 		<div className="about">
 			<div className="about-container">
@@ -7,6 +11,6 @@ const Home = () => {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Home;
