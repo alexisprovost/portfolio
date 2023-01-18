@@ -11,7 +11,7 @@ const Footer = () => {
 						<li>Fait avec ReactJS</li>
 						<li className="spacer">|</li>
 						<li>
-							<a href="https://twitter.com/_alexis_provost" target="_blank">
+							<a href="https://twitter.com/_alexisprovost" target="_blank">
 								<Twitter />
 							</a>
 						</li>
