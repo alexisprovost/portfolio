@@ -1,34 +1,31 @@
 import useDocumentTitle from "../hooks/useDocumentTitle";
+import { useEffect, useState } from "react";
+import Axios from "axios";
 
-import jeucplusplus from "../assets/images/jeu-cplusplus.png";
-import managebiblio from "../assets/images/manage-biblio.png";
-import m19insta1 from "../assets/images/m19.ca-20191008.jpg";
-import m19insta2 from "../assets/images/m19.ca-20201130.jpg";
+import Project from "../components/Project";
 
 const Projects = () => {
 	useDocumentTitle("Mes Projets");
 
+	const [projects, setProjects] = useState([] as any);
+
+	const getProjects = () => {
+		Axios.get("https://api.alexisprovost.com/projects").then((res) => {
+			setProjects(res.data);
+		});
+	};
+
+	useEffect(() => {
+		getProjects();
+	}, []);
+
 	return (
 		<div className="gallery">
 			<div className="gallery-container">
-				<h2 className="section-title">Derniers Projets</h2>
 				<ul>
-					<li>
-						<img src={jeucplusplus} alt="Jeu de C++" loading="lazy" />
-					</li>
-					<li>
-						<img src={managebiblio} alt="Manage Biblio" loading="lazy" />
-					</li>
-				</ul>
-
-				<h2 className="section-title right">Autre Projets</h2>
-				<ul>
-					<li>
-						<img src={m19insta1} alt="M19 Instagram" loading="lazy" />
-					</li>
-					<li>
-						<img src={m19insta2} alt="M19 Instagram" loading="lazy" />
-					</li>
+					{projects.map((project) => (
+						<Project p={project} key={project.id} />
+					))}
 				</ul>
 			</div>
 		</div>
