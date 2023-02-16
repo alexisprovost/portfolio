@@ -244,6 +244,7 @@ section .section-content {
 	border-radius: 4px;
 	color: #333;
 	font-size: 0.8rem;
+	margin-right: 8px;
 	padding: 4px 8px;
 }
 
