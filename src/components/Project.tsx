@@ -3,11 +3,23 @@ import moment from "moment";
 const Project = ({ p }: any) => {
 	const { img, name, date, technologies, description, url } = p;
 
+	let element = <p></p>;
+	if (url)
+		element = (
+			<a href={url} target="_blank" rel="noreferrer">
+				View Project
+			</a>
+		);
+
 	return (
 		<div className="project animate__animated animate__fadeIn">
 			<div className="project-container">
 				<div className="project-image">
-					<img src={img} alt="Project" />
+					<div
+						style={{
+							backgroundImage: `url(${img})`,
+						}}
+					></div>
 				</div>
 				<div className="project-content">
 					<h3 className="project-title">{name}</h3>
@@ -18,11 +30,8 @@ const Project = ({ p }: any) => {
 						))}
 					</h6>
 					<p className="project-description">{description}</p>
-					<div className="project-links">
-						<a href={url} target="_blank" rel="noreferrer">
-							Voir le projet
-						</a>
-					</div>
+
+					<div className="project-links">{element}</div>
 				</div>
 			</div>
 		</div>
