@@ -149,9 +149,10 @@ section .section-content {
 	text-justify: inter-word;
 }
 
-.wave {
+section > .wave {
 	width: 100%;
 	display: block;
+	font-size: 0;
 }
 
 /*
@@ -255,7 +256,7 @@ section .section-content {
 	color: #333;
 	font-size: 0.8rem;
 	margin: 8px 8px 0 0;
-    padding: 4px 8px;
+	padding: 4px 8px;
 }
 
 .project-content .project-description {
@@ -386,7 +387,7 @@ ul.footer-list {
 
 footer .socials {
 	display: flex;
-    flex-direction: row;
+	flex-direction: row;
 }
 
 /* Scroll Bar */
@@ -468,7 +469,6 @@ footer .socials {
 
 	/* Gallery */
 	.gallery-container ul {
-		padding: 0 0 8rem 0;
 		margin: 0 2rem;
 		width: calc(100% - 4rem);
 	}
