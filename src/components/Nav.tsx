@@ -5,23 +5,13 @@ const Nav = () => {
 	const [toggled, setToggled] = useState(false);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-	const updateAnimation = () => {
-		if (toggled) {
-			document.querySelector(".menu-btn")?.classList.remove("toggled");
-		} else {
-			document.querySelector(".menu-btn")?.classList.add("toggled");
-		}
-	};
-
 	const toggleNav = () => {
 		setToggled(!toggled);
-		updateAnimation();
 	};
 
 	useEffect(() => {	
 		const changeWidth = () => {
 			setScreenWidth(window.innerWidth);
-			updateAnimation();
 		};
 
 		window.addEventListener("resize", changeWidth);
@@ -34,7 +24,7 @@ const Nav = () => {
 	return (
 		<nav>
 			{screenWidth <= 768 && (
-				<div className="menu-btn" onClick={toggleNav}>
+				<div className={`menu-btn ${toggled ? "toggled": ""}`} onClick={toggleNav}>
 					<span></span>
 					<span></span>
 					<span></span>
