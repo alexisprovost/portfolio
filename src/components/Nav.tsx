@@ -41,7 +41,7 @@ const Nav = () => {
 				</div>
 			)}
 
-			{(toggled && screenWidth < 768) && (
+			{(toggled || (screenWidth > 768)) && (
 				<ul>
 					<li>
 						<Link to="/" onClick={toggleNav}>Accueil</Link>
