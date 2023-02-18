@@ -12,9 +12,7 @@ const Home = () => {
 					connaître l'avenir de la technologie et j'essaie toujours de me tenir informé des designs et des tendances
 					actuelles. <br />
 					<br />
-					Vous pouvez me contacter à tout moment pour discuter de vos projets.
-					<br />
-					Ça me fera plaisir de vous aider résoudre vos problèmes.
+					Vous pouvez me contacter à tout moment pour discuter de vos projets. Ça me fera plaisir de vous aider résoudre vos problèmes.
 				</p>
 			</div>
 		</div>
