@@ -3,7 +3,7 @@ import moment from "moment";
 const Project = ({ p }: any) => {
 	const { img, name, date, technologies, description, url } = p;
 
-	let element = <p></p>;
+	let element;
 	if (url)
 		element = (
 			<a href={url} target="_blank" rel="noreferrer">
