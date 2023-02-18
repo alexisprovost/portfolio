@@ -95,7 +95,7 @@ nav > ul > li > a:hover:after {
 }
 
 .menu-btn {
-	position: fixed;
+	position: absolute;
     top: 2rem;
     right: 2rem;
     width: 28px;
