@@ -48,7 +48,7 @@ const Contact = () => {
 			<div className="contact-container">
 				<h2 className="section-title">Formulaire de contact</h2>
 				<h4 className="section-subtitle">
-					Vous pouvez me contacter via ce formulaire et je reviendrai votre message sur discord
+					Vous pouvez me contacter via ce formulaire et je receverai votre message sur discord
 				</h4>
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
