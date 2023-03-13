@@ -30,7 +30,7 @@ const Projects = ({ currentLocal }) => {
 
 	useEffect(() => {
 		getProjects();
-	}, []);
+	}, [currentLocal]);
 
 	return (
 		<div className="gallery">
