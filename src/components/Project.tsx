@@ -1,5 +1,5 @@
 import moment from "moment";
-import 'moment/dist/locale/fr';
+import "moment/dist/locale/fr";
 
 import ShowMoreText from "react-show-more-text";
 
@@ -8,12 +8,13 @@ import translate from "../i18n/translate";
 
 const Project = ({ p, currentLocal }) => {
 	const { img, name, date, technologies, description, url } = p;
+	let video = img + "?autoplay=1&loop=1&autopause=0&muted=1&background=1";
 
 	let momentDate = moment(date);
+	const datePassed = momentDate.isBefore(moment());
 	momentDate.locale(currentLocal);
 
-	let element;
-	const datePassed = moment(date).isBefore(moment());
+	let elementButton, elementMedia;
 
 	if (url) {
 		const youtubeRegex = /youtu\.be|youtube\.com/;
@@ -38,23 +39,44 @@ const Project = ({ p, currentLocal }) => {
 			linkText = translate("app.project.projectNotReleased", { date: momentDate.format("LL") });
 		}
 
-		element = (
+		elementButton = (
 			<a href={url} className={linkClass} target="_blank" rel="noreferrer">
 				{linkText}
 			</a>
 		);
 	}
 
+	if (img) {
+		//check if image is a video from vimeo
+		const vimeoRegex = /vimeo\.com/;
+		if (vimeoRegex.test(img)) {
+			elementMedia = (
+				<div>
+					<iframe
+						src={video}
+						allow="autoplay;"
+						title={name}
+						className="project-video"
+					></iframe>
+				</div>
+			);
+		} else {
+			elementMedia = (
+				<div
+					style={{
+						backgroundImage: `url(${img})`,
+					}}
+				></div>
+			);
+		}
+	} else {
+		elementMedia = <div className="project-no-image"></div>;
+	}
+
 	return (
 		<div className="project animate__animated animate__fadeIn">
 			<div className="project-container">
-				<div className="project-image">
-					<div
-						style={{
-							backgroundImage: `url(${img})`,
-						}}
-					></div>
-				</div>
+				<div className="project-image">{elementMedia}</div>
 				<div className="project-content">
 					<h3 className="project-title">{name}</h3>
 					<h4 className="project-date">{momentDate.format("MMMM YYYY")}</h4>
@@ -74,7 +96,7 @@ const Project = ({ p, currentLocal }) => {
 						</ShowMoreText>
 					</div>
 
-					<div className="project-links">{element}</div>
+					<div className="project-links">{elementButton}</div>
 				</div>
 			</div>
 		</div>

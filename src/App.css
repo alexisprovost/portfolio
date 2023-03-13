@@ -283,6 +283,13 @@ section > .wave {
 	border-radius: 15px;
 }
 
+.project .project-video {
+	width: 100%;
+	height: 100%;
+	border: none;
+	border-radius: 15px;
+}
+
 .project-content {
 	flex: 1;
 	display: flex;
