@@ -738,4 +738,24 @@ footer .socials {
 		background-color: var(--card-badges-bg-color-dark);
 		color: var(--text-color-dark);
 	}
+
+	footer .spacer {
+		border-left: solid 3px var(--text-color-dark);
+	}
+
+	/* Scroll Bar */
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: var(--section-color);
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: var(--bg-color-dark);
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: rgb(22, 43, 58);
+	}
 }
