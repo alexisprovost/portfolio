@@ -34,7 +34,7 @@ const Nav = () => {
 			)}
 
 			{(toggled || (screenWidth > 768)) && (
-				<ul>
+				<ul className={(toggled ? 'animate__animated animate__fadeInDown animate__faster' : '')}>
 					<li>
 						<Link to="/" onClick={toggleNav}>{translate("app.nav.home")}</Link>
 					</li>
