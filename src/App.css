@@ -4,11 +4,18 @@
 
 :root {
 	--bg-color: rgb(241, 241, 241);
+	--bg-color-dark: #080d10;
+	--text-color-dark: #d7dee3;
 	--link-color: #000;
 	--link-hover-color: #4d5a67;
 	--nav-bottom-line-color: #647889;
 	--section-color: #141b20;
-	--card-background-color: #17232c;
+	--card-background-color: #101518;
+	--card-background-color-dark: #0b1216;
+	--card-badges-bg-color: #eee;
+	--card-badges-bg-color-dark: #203440;
+	--card-badges-color: #333;
+	--card-badges-color-dark: #fff;
 	--button-color: rgb(75 93 105);
 	--button-color-hover: #1a5880;
 }
@@ -167,7 +174,7 @@ nav > ul > li > a:hover:after {
 }
 
 .bonjour-section {
-	margin: 0 1rem;
+	margin: 0 2rem;
 }
 
 .about,
@@ -301,9 +308,9 @@ section > .wave {
 }
 
 .project-content .project-technologies span {
-	background-color: #eee;
+	background-color: var(--card-badges-bg-color);
 	border-radius: 4px;
-	color: #333;
+	color: var(--card-badges-color);
 	font-size: 0.8rem;
 	margin: 8px 8px 0 0;
 	padding: 4px 8px;
@@ -424,6 +431,11 @@ section > .wave {
 
 .contact-container button[type="submit"]:hover {
 	background-color: var(--button-color-hover);
+}
+
+.contact-container input,
+.contact-container textarea {
+	border: none;
 }
 
 /*
@@ -695,5 +707,35 @@ footer .socials {
 	footer ul.footer-list,
 	footer ul.footer-lang {
 		font-size: 0.8rem;
+	}
+}
+
+/* Support dark mode */
+@media (prefers-color-scheme: dark) {
+	html, body {
+		background-color: var(--bg-color-dark);
+		color: var(--text-color-dark);
+	}
+
+	a, a:link, a:visited, a:active {
+		color: var(--text-color-dark);
+	}
+
+	.menu-btn > span:nth-child(1), .menu-btn > span:nth-child(2), .menu-btn > span:nth-child(3) {
+		background-color: var(--text-color-dark);
+	}
+
+	input, textarea {
+		background-color: var(--bg-color-dark);
+		color: var(--text-color-dark);
+	}
+
+	.project {
+		background-color: var(--card-background-color-dark);
+	}
+
+	.project-content .project-technologies span {
+		background-color: var(--card-badges-bg-color-dark);
+		color: var(--text-color-dark);
 	}
 }
