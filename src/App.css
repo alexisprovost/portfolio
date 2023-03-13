@@ -344,6 +344,22 @@ section > .wave {
 	background-color: var(--button-color-hover);
 }
 
+.project-links a.project-link-youtube {
+	background-color: #4a1f1f;
+}
+
+.project-links a.project-link-youtube:hover {
+	background-color: #8f3333;
+}
+
+.project-links a.project-link-github {
+	background-color: #1e3858;
+}
+
+.project-links a.project-link-github:hover {
+	background-color: #4078c0;
+}
+
 /*
 * Contact
 */

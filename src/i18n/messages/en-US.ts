@@ -11,6 +11,9 @@ export default {
 		"app.home.about.description":
 			"I design websites and try to learn new things every day. I am curious about the future of technology and I always try to stay up-to-date with current designs and trends.{br}{br}You can contact me anytime to discuss your projects. I'd be happy to help you solve your problems.",
 		"app.project.viewProject": "View Project",
+		"app.project.viewProjectVideo": "View on YouTube",
+		"app.project.viewProjectGithub": "View on GitHub",
+		"app.project.projectNotReleased": "This project is releasing on the {date}",
         "app.project.showMore": "Show More",
 		"app.project.showLess": "{br}Show Less",
 		"app.contact.title": "Contact Form",

@@ -51,7 +51,7 @@ const Projects = ({ currentLocal }) => {
 				) : (
 					<ul>
 						{projects.map((project) => (
-							<Project p={project} key={project.id} />
+							<Project p={project} key={project.id} currentLocal={currentLocal} />
 						))}
 					</ul>
 				)}
