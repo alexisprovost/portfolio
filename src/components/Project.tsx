@@ -8,7 +8,7 @@ import translate from "../i18n/translate";
 
 const Project = ({ p, currentLocal }) => {
 	const { img, name, date, technologies, description, url } = p;
-	let video = img + "?autoplay=1&loop=1&autopause=0&muted=1&background=1";
+	let video = img + "?autoplay=1&loop=1&autopause=0&muted=1";
 
 	let momentDate = moment(date);
 	const datePassed = momentDate.isBefore(moment());
@@ -54,7 +54,7 @@ const Project = ({ p, currentLocal }) => {
 				<div>
 					<iframe
 						src={video}
-						allow="autoplay;"
+						allow="autoplay; fullscreen; picture-in-picture"
 						title={name}
 						className="project-video"
 					></iframe>
