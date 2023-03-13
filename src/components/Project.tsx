@@ -1,5 +1,7 @@
 import moment from "moment";
 
+import translate from "../i18n/translate";
+
 const Project = ({ p }: any) => {
 	const { img, name, date, technologies, description, url } = p;
 
@@ -7,7 +9,7 @@ const Project = ({ p }: any) => {
 	if (url)
 		element = (
 			<a href={url} target="_blank" rel="noreferrer">
-				View Project
+				{translate("app.project.viewProject")}
 			</a>
 		);
 

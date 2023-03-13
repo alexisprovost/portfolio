@@ -3,6 +3,8 @@ import axios from "axios";
 import izitoast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
+import translate from "../i18n/translate";
+
 const Contact = () => {
 	useDocumentTitle("Me Contacter");
 
@@ -46,43 +48,38 @@ const Contact = () => {
 	return (
 		<div className="contact">
 			<div className="contact-container">
-				<h2 className="section-title">Formulaire de contact</h2>
-				<h4 className="section-subtitle">
-					Vous pouvez me contacter via ce formulaire et je receverai votre message sur discord
-				</h4>
+				<h2 className="section-title">{translate("app.contact.title")}</h2>
+				<h4 className="section-subtitle">{translate("app.contact.subtitle")}</h4>
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
-						<label htmlFor="name">Nom</label>
+						<label htmlFor="name">{translate("app.contact.name")}</label>
 						<input
 							type="text"
 							className="form-control"
 							id="name"
 							name="name"
-							placeholder="Votre nom"
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="email">Email</label>
+						<label htmlFor="email">{translate("app.contact.email")}</label>
 						<input
 							type="email"
 							className="form-control"
 							id="email"
 							name="email"
-							placeholder="Votre email"
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="message">Message</label>
+						<label htmlFor="message">{translate("app.contact.message")}</label>
 						<textarea
 							className="form-control"
 							id="message"
 							name="message"
-							placeholder="Votre message"
 							required
 						></textarea>
 					</div>
 					<button type="submit" className="btn btn-primary">
-						Envoyer
+						{translate("app.contact.submit")}
 					</button>
 				</form>
 			</div>

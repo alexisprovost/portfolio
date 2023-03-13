@@ -200,8 +200,8 @@ section .section-content {
 
 section > .wave {
 	width: 100%;
+	height: 300px;
 	display: block;
-	font-size: 0;
 }
 
 /*
@@ -350,7 +350,6 @@ section > .wave {
 }
 
 .contact-container form {
-	padding: 0px 0 8rem 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -371,11 +370,13 @@ section > .wave {
 
 .contact-container input,
 .contact-container textarea {
+	width: 100%;
 	width: -webkit-fill-available;
-	height: 4rem;
+	width: -moz-available;
+	width: fill-available;
 	border-radius: 0.5rem;
-	font-size: 1rem;
-	padding: 0.2rem 1rem;
+    font-size: 1.25rem;
+    padding: 1rem 1rem
 }
 
 .contact-container textarea {
@@ -405,7 +406,10 @@ section > .wave {
 */
 
 footer .spacer {
-	padding: 0 1rem;
+	padding: 0 1rem 0 0;
+    margin: 0 0 0 1rem;
+    border-left: solid black 3px;
+    height: 1.5rem;
 }
 
 footer li a svg {
@@ -422,15 +426,30 @@ footer svg {
 	padding: 0 1rem;
 }
 
-ul.footer-list {
+footer .footer-content {
+	margin: 0rem 2rem 6rem 2rem;
+}
+
+footer ul.footer-list {
 	list-style-type: none;
 	padding: 0;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	margin: 0 0 6rem 0;
 	line-height: 3rem;
+	font-size: 1.2rem;
+}
+
+footer ul.footer-lang {
+	cursor: pointer;
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	line-height: 2rem;
 	font-size: 1.2rem;
 }
 
@@ -503,17 +522,27 @@ footer .socials {
 		text-align: left;
 	}
 
+	section > .wave {
+		height: 100px;
+	}
+
 	.about-container {
 		padding: 2rem 2rem 4rem 2rem;
 	}
 
-	ul.footer-list {
+	footer ul.footer-list{
 		flex-direction: column;
-		margin: 2rem 0 4rem 0;
+		margin: 2rem 0 0rem 0;
 		font-size: 0.8rem;
 	}
 
-	ul.footer-list > .spacer {
+	footer ul.footer-lang {
+		flex-direction: column;
+		margin: 2rem 0 0rem 0;
+		font-size: 0.8rem;
+	}
+
+	footer ul.footer-list > .spacer {
 		display: none;
 	}
 
@@ -606,27 +635,11 @@ footer .socials {
 		line-height: 2rem;
 	}
 
-	.about-container {
-		padding: 2rem 2rem 4rem 2rem;
-	}
-
-	/* Gallery */
-	.gallery-container ul {
-		padding: 0 0 8rem 0;
-		margin: 0 auto;
-		width: 100%;
-	}
-
-	/* Contact Page */
-	.contact-container .section-title {
-		padding: 0 2rem 4rem 2rem;
+	section > .wave {
+		height: 200px;
 	}
 
 	.contact-container form {
 		width: 100%;
 	}
-}
-
-@media screen and (min-width: 1200px) {
-	/* Style utilisé dans le css de base */
 }

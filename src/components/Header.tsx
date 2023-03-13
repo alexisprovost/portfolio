@@ -4,6 +4,8 @@ import HeaderTitle from "./HeaderTitle";
 
 import { Routes, Route } from "react-router-dom";
 
+import translate from "../i18n/translate";
+
 const Header = () => {
 	return (
 		<header>
@@ -11,8 +13,8 @@ const Header = () => {
 
 			<Routes>
 				<Route path="/" element={<Bonjour />} />
-				<Route path="/projects" element={<HeaderTitle title="Mes Projets" />} />
-				<Route path="/contact" element={<HeaderTitle title="Me Contacter" />} />
+				<Route path="/projects" element={<HeaderTitle title={translate("app.nav.projects")} />} />
+				<Route path="/contact" element={<HeaderTitle title={translate("app.nav.contact")} />} />
 
 				<Route path="*" element={<HeaderTitle title="404" />} />
 			</Routes>
