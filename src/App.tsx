@@ -30,7 +30,7 @@ const App = () => {
 				<main>
 					<Routes>
 						<Route path="/" element={<WaveContainer page={<Home />} />} />
-						<Route path="/projects" element={<WaveContainer page={<Projects />} />} />
+						<Route path="/projects" element={<WaveContainer page={<Projects currentLocal={locale} />} />} />
 						<Route path="/contact" element={<WaveContainer page={<Contact />} />} />
 					</Routes>
 				</main>

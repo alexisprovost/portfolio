@@ -3,7 +3,7 @@ import { LOCALES } from "../locales";
 export default {
     [LOCALES.FRENCH]: {
         "app.nav.home": "Accueil",
-        "app.nav.projects": "Mes projets",
+        "app.nav.projects": "Mes Projets",
         "app.nav.contact": "Me Contacter",
         "app.header.jumbotron.title": "Salut, je m'appelle Alexis",
         "app.header.jumbotron.slogan": "Je suis un développeur Full Stack",
@@ -18,5 +18,7 @@ export default {
         "app.contact.submit": "Envoyer",
         "app.footer.madeWith": "Fait avec",
         "app.footer.english": "Passer en Anglais",
+        "app.loading": "La patience mène aux merveilles de la vie...",
+        "app.loading.error": "Oups ! C'est embarrassant.{br}{br}Il semblerait que le backend soit en panne.{br}{br}N'hésite pas à réessayer dans un moment, ou à me contacter.",
     },
 };

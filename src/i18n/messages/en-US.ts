@@ -19,5 +19,7 @@ export default {
 		"app.contact.submit": "Send",
 		"app.footer.madeWith": "Made with",
 		"app.footer.french": "Switch to French",
+		"app.loading": "Best things in life takes time...",
+		"app.loading.error": "Oh no! That's embarrassing.{br}{br}It seems that the backend just crashed{br}{br}You can try again later or contact me.",
 	},
 };
