@@ -1,7 +1,7 @@
-import { Twitter, Linkedin, Github, Instagram } from "react-bootstrap-icons";
+import { FaTwitter, FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaEnvelope, FaCodepen, FaVimeo } from "react-icons/fa";
+import { ReactComponent as DevToLogo } from "../assets/icons/devto.svg";
 
 import { LOCALES } from "../i18n/locales";
-
 import translate from "../i18n/translate";
 
 const Footer = ({ currentLocal, localeChanger }) => {
@@ -21,23 +21,48 @@ const Footer = ({ currentLocal, localeChanger }) => {
 						<li className="spacer"></li>
 						<div className="socials">
 							<li>
+								<a href="https://github.com/alexisprovost" target="_blank" aria-label="Whats up!">
+									<FaGithub />
+								</a>
+							</li>
+							<li>
+								<a href="https://dev.to/alexisprovost" target="_blank">
+									<DevToLogo />
+								</a>
+							</li>
+							<li>
+								<a href="https://codepen.io/alexisprovost" target="_blank">
+									<FaCodepen />
+								</a>
+							</li>
+							<li>
+								<a href="https://www.linkedin.com/in/alexisprovost/" target="_blank" aria-label="LinkedIn">
+									<FaLinkedin />
+								</a>
+							</li>
+							<li>
 								<a href="https://twitter.com/_alexisprovost" target="_blank">
-									<Twitter />
-								</a>
-							</li>
-							<li>
-								<a href="https://www.linkedin.com/in/alexisprovost/" target="_blank">
-									<Linkedin />
-								</a>
-							</li>
-							<li>
-								<a href="https://github.com/alexisprovost" target="_blank">
-									<Github />
+									<FaTwitter />
 								</a>
 							</li>
 							<li>
 								<a href="https://www.instagram.com/alexis.provost/" target="_blank">
-									<Instagram />
+									<FaInstagram />
+								</a>
+							</li>
+							<li>
+								<a href="https://www.youtube.com/@alexisprovost" target="_blank">
+									<FaYoutube />
+								</a>
+							</li>
+							<li>
+								<a href="https://vimeo.com/alexisprovost" target="_blank">
+									<FaVimeo />
+								</a>
+							</li>
+							<li>
+								<a href="mailto:alexis@provost.cloud" target="_blank">
+									<FaEnvelope />
 								</a>
 							</li>
 						</div>

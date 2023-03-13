@@ -23,7 +23,7 @@ export default {
 		"app.contact.message": "Message",
 		"app.contact.submit": "Send",
 		"app.footer.madeWith": "Made with",
-		"app.footer.french": "Passer en Français",
+		"app.footer.french": "Voir en Français",
 		"app.loading": "Best things in life takes time...",
 		"app.loading.error": "Oh no! That's embarrassing.{br}{br}It seems that the backend just crashed{br}{br}You can try again later or contact me.",
 	},
