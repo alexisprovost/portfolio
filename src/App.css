@@ -244,6 +244,7 @@ section > .wave {
 	overflow: hidden;
 	transition: box-shadow 0.3s ease;
 	margin: 0rem 6rem 7rem 6rem;
+	width: 100%;
 }
 
 .project:hover {
@@ -313,6 +314,14 @@ section > .wave {
 	line-height: 2.5rem;
 	margin: 0 0 8px;
 	text-align: justify;
+}
+
+.project-content .project-description-anchor {
+	cursor: pointer;
+	color: var(--button-color);
+	font-size: 1.2rem;
+	text-decoration: none;
+	transition: color 0.3s ease;
 }
 
 .project-content .project-links {
@@ -573,6 +582,10 @@ footer .socials {
 	.project-container {
 		flex-direction: column;
 		padding: 1rem;
+	}
+
+	.project-content .project-description-anchor {
+		font-size: 0.8rem;
 	}
 
 	.project-content {

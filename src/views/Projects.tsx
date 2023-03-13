@@ -39,7 +39,7 @@ const Projects = ({ currentLocal }) => {
 					<div className="loading" style={{ display: "flex", justifyContent: "center", padding: "0 0 4rem 0" }}>
 						<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 							<Oval strokeWidth="4" stroke="#fff" />
-							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0" }}>{translate("app.loading")}</p>
+							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>{translate("app.loading")}</p>
 						</div>
 					</div>
 				) : error ? (

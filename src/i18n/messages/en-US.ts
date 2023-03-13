@@ -11,6 +11,8 @@ export default {
 		"app.home.about.description":
 			"I design websites and try to learn new things every day. I am curious about the future of technology and I always try to stay up-to-date with current designs and trends.{br}{br}You can contact me anytime to discuss your projects. I'd be happy to help you solve your problems.",
 		"app.project.viewProject": "View Project",
+        "app.project.showMore": "Show More",
+		"app.project.showLess": "{br}Show Less",
 		"app.contact.title": "Contact Form",
 		"app.contact.subtitle": "You can contact me via this form and I will receive your message on Discord",
 		"app.contact.name": "Name",

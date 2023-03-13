@@ -1,4 +1,5 @@
 import moment from "moment";
+import ShowMoreText from "react-show-more-text";
 
 import translate from "../i18n/translate";
 
@@ -31,7 +32,11 @@ const Project = ({ p }: any) => {
 							<span key={technology.id}>{technology.name}</span>
 						))}
 					</h6>
-					<p className="project-description">{description}</p>
+					<p className="project-description">
+						<ShowMoreText lines={6} more={translate("app.project.showMore", { br: <br /> })} less={translate("app.project.showLess", { br: <br /> })} anchorClass="project-description-anchor">
+							{description}
+						</ShowMoreText>
+					</p>
 
 					<div className="project-links">{element}</div>
 				</div>
