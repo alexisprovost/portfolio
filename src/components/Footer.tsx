@@ -1,4 +1,14 @@
-import { FaTwitter, FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaEnvelope, FaCodepen, FaVimeo } from "react-icons/fa";
+import {
+	FaTwitter,
+	FaGithub,
+	FaLinkedin,
+	FaInstagram,
+	FaYoutube,
+	FaEnvelope,
+	FaCodepen,
+	FaVimeo,
+} from "react-icons/fa";
+import { GiTwoCoins } from "react-icons/gi";
 import { ReactComponent as DevToLogo } from "../assets/icons/devto.svg";
 
 import { LOCALES } from "../i18n/locales";
@@ -58,6 +68,11 @@ const Footer = ({ currentLocal, localeChanger }) => {
 							<li>
 								<a href="https://vimeo.com/alexisprovost" target="_blank">
 									<FaVimeo />
+								</a>
+							</li>
+							<li>
+								<a href="https://donate.stripe.com/6oEaHBaKm7QU2IM5km" target="_blank">
+									<GiTwoCoins />
 								</a>
 							</li>
 							<li>
