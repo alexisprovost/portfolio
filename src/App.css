@@ -457,13 +457,13 @@ footer .spacer {
     height: 1.5rem;
 }
 
-footer li a svg {
+footer a svg {
 	font-size: 2rem;
 	transition: all 0.2s;
 	vertical-align: middle;
 }
 
-footer li a svg:hover {
+footer a svg:hover {
 	color: var(--link-hover-color);
 }
 

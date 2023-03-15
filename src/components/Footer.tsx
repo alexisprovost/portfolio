@@ -30,56 +30,45 @@ const Footer = ({ currentLocal, localeChanger }) => {
 						</li>
 						<li className="spacer"></li>
 						<div className="socials">
-							<li>
-								<a href="https://github.com/alexisprovost" target="_blank" aria-label="Whats up!">
-									<FaGithub />
-								</a>
-							</li>
-							<li>
-								<a href="https://dev.to/alexisprovost" target="_blank">
-									<DevToLogo />
-								</a>
-							</li>
-							<li>
-								<a href="https://codepen.io/alexisprovost" target="_blank">
-									<FaCodepen />
-								</a>
-							</li>
-							<li>
-								<a href="https://www.linkedin.com/in/alexisprovost/" target="_blank" aria-label="LinkedIn">
-									<FaLinkedin />
-								</a>
-							</li>
-							<li>
-								<a href="https://twitter.com/_alexisprovost" target="_blank">
-									<FaTwitter />
-								</a>
-							</li>
-							<li>
-								<a href="https://www.instagram.com/alexis.provost/" target="_blank">
-									<FaInstagram />
-								</a>
-							</li>
-							<li>
-								<a href="https://www.youtube.com/@alexisprovost" target="_blank">
-									<FaYoutube />
-								</a>
-							</li>
-							<li>
-								<a href="https://vimeo.com/alexisprovost" target="_blank">
-									<FaVimeo />
-								</a>
-							</li>
-							<li>
-								<a href="https://donate.stripe.com/6oEaHBaKm7QU2IM5km" target="_blank">
-									<GiTwoCoins />
-								</a>
-							</li>
-							<li>
-								<a href="mailto:alexis@provost.cloud" target="_blank">
-									<FaEnvelope />
-								</a>
-							</li>
+							<a href="https://github.com/alexisprovost" target="_blank" aria-label="Github">
+								<FaGithub />
+							</a>
+
+							<a href="https://dev.to/alexisprovost" target="_blank" aria-label="Dev.to">
+								<DevToLogo />
+							</a>
+
+							<a href="https://codepen.io/alexisprovost" target="_blank" aria-label="Codepen">
+								<FaCodepen />
+							</a>
+
+							<a href="https://www.linkedin.com/in/alexisprovost/" target="_blank" aria-label="LinkedIn">
+								<FaLinkedin />
+							</a>
+
+							<a href="https://twitter.com/_alexisprovost" target="_blank" aria-label="Twitter">
+								<FaTwitter />
+							</a>
+
+							<a href="https://www.instagram.com/alexis.provost/" target="_blank" aria-label="Instagram">
+								<FaInstagram />
+							</a>
+
+							<a href="https://www.youtube.com/@alexisprovost" target="_blank" aria-label="Youtube">
+								<FaYoutube />
+							</a>
+
+							<a href="https://vimeo.com/alexisprovost" target="_blank" aria-label="Vimeo">
+								<FaVimeo />
+							</a>
+
+							<a href="https://donate.stripe.com/6oEaHBaKm7QU2IM5km" target="_blank" aria-label="Donate">
+								<GiTwoCoins />
+							</a>
+
+							<a href="mailto:alexis@provost.cloud" target="_blank" aria-label="Email">
+								<FaEnvelope />
+							</a>
 						</div>
 					</ul>
 					<ul className="footer-lang">
