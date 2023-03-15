@@ -12,7 +12,7 @@ export default {
         "app.project.viewProject": "Voir le projet",
         "app.project.viewProjectVideo": "Regarder sur YouTube",
         "app.project.viewProjectGithub": "Voir sur GitHub",
-        "app.project.projectNotReleased": "Ce projet sortira le {date}",
+        "app.project.projectNotReleased": "La sortie du projet est prévue pour le {date}",
         "app.project.showMore": "Afficher plus",
 		"app.project.showLess": "{br}Afficher moins",
         "app.contact.title": "Formulaire de contact",
@@ -23,7 +23,7 @@ export default {
         "app.contact.submit": "Envoyer",
         "app.footer.madeWith": "Fait avec",
         "app.footer.english": "Switch to English",
-        "app.loading": "La patience mène aux merveilles de la vie...",
+        "app.loading": "Chargement...",
         "app.loading.error": "Oups ! C'est embarrassant.{br}{br}Il semblerait que le backend soit en panne.{br}{br}N'hésite pas à réessayer dans un moment, ou à me contacter.",
     },
 };
