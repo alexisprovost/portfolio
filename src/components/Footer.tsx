@@ -9,6 +9,7 @@ import {
 	FaVimeo,
 } from "react-icons/fa";
 import { GiTwoCoins } from "react-icons/gi";
+import { GrStatusUnknown } from "react-icons/gr";
 import { ReactComponent as DevToLogo } from "../assets/icons/devto.svg";
 
 import { LOCALES } from "../i18n/locales";
@@ -54,8 +55,8 @@ const Footer = ({ currentLocal, localeChanger }) => {
 								<FaInstagram />
 							</a>
 
-							<a href="https://www.youtube.com/@alexisprovost" target="_blank" aria-label="Youtube">
-								<FaYoutube />
+							<a href="https://stats.uptimerobot.com/Q8nALtXWnk" target="_blank" aria-label="Uptime">
+								<GrStatusUnknown />
 							</a>
 
 							<a href="https://vimeo.com/alexisprovost" target="_blank" aria-label="Vimeo">

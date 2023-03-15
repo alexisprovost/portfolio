@@ -471,6 +471,10 @@ footer svg {
 	padding: 0 1rem;
 }
 
+footer svg path {
+	stroke: var(--link-color);
+}
+
 footer .footer-content {
 	margin: 0rem 2rem 4rem;
 }
@@ -733,6 +737,10 @@ footer .socials {
 
 	a, a:link, a:visited, a:active {
 		color: var(--text-color-dark);
+	}
+
+	footer svg path {
+		stroke: var(--link-color-dark);
 	}
 
 	.menu-btn > span:nth-child(1), .menu-btn > span:nth-child(2), .menu-btn > span:nth-child(3) {
