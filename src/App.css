@@ -328,6 +328,7 @@ section > .wave {
 	line-height: 2.5rem;
 	margin: 0 0 8px;
 	text-align: justify;
+	white-space: pre-line;
 }
 
 .project-content .project-description-anchor {
