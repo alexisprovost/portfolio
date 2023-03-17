@@ -2,6 +2,8 @@
 * Par Alexis Provost
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
 :root {
 	--bg-color: rgb(241, 241, 241);
 	--bg-color-dark: #080d10;
@@ -21,7 +23,7 @@
 }
 
 * {
-	font-family: "Krona One", sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 a,
