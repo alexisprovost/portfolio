@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import "animate.css";
-import "@fontsource/poppins/700.css";
+import "@fontsource/krona-one";
 
 import Header from "./components/Header";
 import Home from "./views/Home";
