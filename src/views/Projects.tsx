@@ -14,14 +14,31 @@ const Projects = ({ currentLocal }) => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 
-	const getProjects = () => {
+	const getProjects = (apiUrl: string) => {
+		setError(false);
 		setLoading(true);
-		Axios.get("https://api.alexisprovost.com/" + currentLocal.split("-")[0] + "/projects")
+		Axios.get(apiUrl + currentLocal.split("-")[0] + "/projects", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			timeout: 5000,
+		})
 			.then((res) => {
 				setProjects(res.data);
 			})
 			.catch((error) => {
+				//Handle request if api is down
 				setError(true);
+				Axios.get("https://ap.m19.workers.dev/" + currentLocal.split("-")[0] + "/projects", {
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}).then((res) => {
+						setError(false);
+						setProjects(res.data);
+				}).catch((error) => {
+					setError(true);
+				});
 			})
 			.finally(() => {
 				setLoading(false);
@@ -29,7 +46,7 @@ const Projects = ({ currentLocal }) => {
 	};
 
 	useEffect(() => {
-		getProjects();
+		getProjects("https://api.alexisprovost.com/");
 	}, [currentLocal]);
 
 	return (
@@ -39,13 +56,17 @@ const Projects = ({ currentLocal }) => {
 					<div className="loading" style={{ display: "flex", justifyContent: "center", padding: "0 0 4rem 0" }}>
 						<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 							<Oval strokeWidth="4" stroke="#fff" />
-							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>{translate("app.loading")}</p>
+							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>
+								{translate("app.loading")}
+							</p>
 						</div>
 					</div>
 				) : error ? (
 					<div className="loading" style={{ display: "flex", justifyContent: "center", padding: "0 0 4rem 0" }}>
 						<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>{translate("app.loading.error", { br: <br /> })}</p>
+							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>
+								{translate("app.loading.error", { br: <br /> })}
+							</p>
 						</div>
 					</div>
 				) : (
