@@ -15,23 +15,39 @@ const Project = ({ p, currentLocal }) => {
 
 	let elementButton, elementMedia;
 
-	if (url) {
+	function getLinkProperties(url: string, datePassed: boolean) {
 		const youtubeRegex = /youtu\.be|youtube\.com/;
-		let linkClass: string, linkText: any;
+		const imageRegex = /^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim;
 
-		switch (true) {
-			case youtubeRegex.test(url):
-				linkClass = "project-link-youtube";
-				linkText = translate("app.project.viewProjectVideo");
-				break;
-			case url.indexOf("github") > -1:
-				linkClass = "project-link-github";
-				linkText = translate("app.project.viewProjectGithub");
-				break;
-			default:
-				linkClass = "";
-				linkText = translate("app.project.viewProject");
+		if (youtubeRegex.test(url)) {
+			return {
+				linkClass: "project-link-youtube",
+				linkText: translate("app.project.viewProjectVideo"),
+			};
 		}
+
+		if (url.includes("github")) {
+			return {
+				linkClass: "project-link-github",
+				linkText: translate("app.project.viewProjectGithub"),
+			};
+		}
+
+		if (imageRegex.test(url)) {
+			return {
+				linkClass: "project-link-image",
+				linkText: translate("app.project.viewProjectImage"),
+			};
+		}
+
+		return {
+			linkClass: "",
+			linkText: translate("app.project.viewProject"),
+		};
+	}
+
+	if (url) {
+		let { linkClass, linkText } = getLinkProperties(url, datePassed);
 
 		if (!datePassed) {
 			linkClass += " project-link-disabled";

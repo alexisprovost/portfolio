@@ -12,6 +12,7 @@ export default {
         "app.project.viewProject": "Voir le projet",
         "app.project.viewProjectVideo": "Regarder sur YouTube",
         "app.project.viewProjectGithub": "Voir sur GitHub",
+        "app.project.viewProjectImage": "Voir l'image du projet",
         "app.project.projectNotReleased": "La sortie du projet est prévue pour le {date}",
         "app.project.showMore": "Afficher plus",
 		"app.project.showLess": "{br}Afficher moins",
