@@ -8,7 +8,7 @@ export default {
         "app.header.jumbotron.title": "Salut, je m'appelle Alexis",
         "app.header.jumbotron.slogan": "Je suis un développeur Full Stack",
         "app.home.about.title": "À Propos",
-        "app.home.about.description": "Je conçois des sites Web et j'essaie d'apprendre de nouvelles choses tous les jours. Je suis curieux de connaître l'avenir de la technologie et j'essaie toujours de me tenir informé des designs et des tendances actuelles.{br}{br}N'hésitez pas à me contacter si vous avez des questions ou des projets dont vous souhaitez discuter.",
+        "app.home.about.description": "Je conçois des sites Web et j'apprend de nouvelles choses tous les jours. Je suis curieux de connaître l'avenir de la technologie et je me tiens informé des designs et des tendances actuelles.{br}{br}N'hésitez pas à me contacter si vous avez des questions ou des projets dont vous souhaitez discuter.",
         "app.project.viewProject": "Voir le projet",
         "app.project.viewProjectVideo": "Regarder sur YouTube",
         "app.project.viewProjectGithub": "Voir sur GitHub",

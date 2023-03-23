@@ -9,7 +9,7 @@ export default {
 		"app.header.jumbotron.slogan": "I am a Full Stack Developer",
 		"app.home.about.title": "About Me",
 		"app.home.about.description":
-			"I design websites and try to learn new things every day. I am curious about the future of technology and I always try to stay up-to-date with current designs and trends.{br}{br}Don't hesitate to contact me if you have any questions or projects that you would like to discuss.",
+			"I design websites and I learn new things every day. I am curious about the future of technology and I stay up-to-date with current designs and trends.{br}{br}Don't hesitate to contact me if you have any questions or projects that you would like to discuss.",
 		"app.project.viewProject": "View Project",
 		"app.project.viewProjectVideo": "View on YouTube",
 		"app.project.viewProjectGithub": "View on GitHub",
