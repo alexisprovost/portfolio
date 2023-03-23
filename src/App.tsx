@@ -26,7 +26,7 @@ const App = () => {
 	return (
 		<I18nProvider locale={locale}>
 			<div className="App">
-				<Header />
+				<Header currentLocal={locale} localeChanger={setLocale} />
 				<main>
 					<Routes>
 						<Route path="/" element={<WaveContainer page={<Home />} />} />
@@ -34,7 +34,7 @@ const App = () => {
 						<Route path="/contact" element={<WaveContainer page={<Contact />} />} />
 					</Routes>
 				</main>
-				<Footer currentLocal={locale} localeChanger={setLocale} />
+				<Footer />
 			</div>
 		</I18nProvider>
 	);

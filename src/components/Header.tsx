@@ -6,10 +6,10 @@ import { Routes, Route } from "react-router-dom";
 
 import translate from "../i18n/translate";
 
-const Header = () => {
+const Header = ({ currentLocal, localeChanger }) => {
 	return (
 		<header>
-			<Nav />
+			<Nav currentLocal={currentLocal} localeChanger={localeChanger} />
 
 			<Routes>
 				<Route path="/" element={<Bonjour />} />

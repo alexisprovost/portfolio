@@ -15,7 +15,7 @@ import { ReactComponent as DevToLogo } from "../assets/icons/devto.svg";
 import { LOCALES } from "../i18n/locales";
 import translate from "../i18n/translate";
 
-const Footer = ({ currentLocal, localeChanger }) => {
+const Footer = () => {
 	return (
 		<footer>
 			<div className="footer-container">
@@ -71,13 +71,6 @@ const Footer = ({ currentLocal, localeChanger }) => {
 								<FaEnvelope />
 							</a>
 						</div>
-					</ul>
-					<ul className="footer-lang">
-						{currentLocal === LOCALES.ENGLISH ? (
-							<li onClick={() => localeChanger(LOCALES.FRENCH)}>{translate("app.footer.french")}</li>
-						) : (
-							<li onClick={() => localeChanger(LOCALES.ENGLISH)}>{translate("app.footer.english")}</li>
-						)}
 					</ul>
 				</div>
 			</div>
