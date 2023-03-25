@@ -599,7 +599,7 @@ footer .socials {
 
 	footer ul.footer-list {
 		flex-direction: column;
-		margin: 2rem 0 0rem 0;
+		margin: 2rem 0;
 		font-size: 0.8rem;
 	}
 
