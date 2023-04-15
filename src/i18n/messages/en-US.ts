@@ -10,6 +10,7 @@ export default {
 		"app.home.about.title": "About Me",
 		"app.home.about.description":
 			"I design websites and I learn new things every day. I am curious about the future of technology and I stay up-to-date with current designs and trends.{br}{br}Don't hesitate to contact me if you have any questions or projects that you would like to discuss.",
+		"app.home.about.viewProjects": "View my projects",
 		"app.project.viewProject": "View Project",
 		"app.project.viewProjectVideo": "View on YouTube",
 		"app.project.viewProjectGithub": "View on GitHub",
