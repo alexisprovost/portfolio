@@ -1,14 +1,5 @@
-import {
-	FaTwitter,
-	FaGithub,
-	FaLinkedin,
-	FaInstagram,
-	FaYoutube,
-	FaEnvelope,
-	FaCodepen,
-	FaVimeo,
-} from "react-icons/fa";
-import { GiTwoCoins } from "react-icons/gi";
+import { FaTwitter, FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaEnvelope, FaCodepen, FaVimeo } from "react-icons/fa";
+import { SiGithubsponsors } from "react-icons/si";
 import { GrStatusUnknown } from "react-icons/gr";
 import { ReactComponent as DevToLogo } from "../assets/icons/devto.svg";
 
@@ -63,8 +54,8 @@ const Footer = () => {
 								<FaVimeo />
 							</a>
 
-							<a href="https://donate.stripe.com/6oEaHBaKm7QU2IM5km" target="_blank" aria-label="Donate">
-								<GiTwoCoins />
+							<a href="https://github.com/sponsors/alexisprovost" target="_blank" aria-label="Sponsor">
+								<SiGithubsponsors />
 							</a>
 
 							<a href="mailto:alexis@provost.cloud" target="_blank" aria-label="Email">
