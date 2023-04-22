@@ -16,7 +16,7 @@ const Footer = () => {
 						<li className="spacer"></li>
 						<li>
 							{translate("app.footer.madeWith")}{" "}
-							<a href="https://reactjs.org/" target="_blank">
+							<a href="https://react.dev/" target="_blank">
 								React
 							</a>
 						</li>
