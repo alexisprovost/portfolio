@@ -260,10 +260,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.15.18.tgz#128b76ecb9be48b60cf5cfc1c63a4f00691a3239"
   integrity sha512-L4jVKS82XVhw2nvzLg/19ClLWg0y27ulRwuP7lcyL6AbUWB5aPglXY3M21mauDQMDfRLs8cQmeT03r/+X3cZYQ==
 
-"@fontsource/krona-one@^4.5.10":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/krona-one/-/krona-one-4.5.11.tgz#5eb002bba550d06e3d3edfc387aa0e8538dafefb"
-  integrity sha512-acVuL3Pvapt7+mVkAj+JyVjo+C9RkfKxq2ZelH+ux2/7tt8nK5lrC9pYMLrJxzcd8N3wDShVgdx6sQk1R09vlQ==
+"@fontsource/krona-one@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/krona-one/-/krona-one-5.0.2.tgz#e72cb8d7365ed5e9333e4e6b0b81c019208c79e9"
+  integrity sha512-RHwer1kzU/qnA6QzJ7g6Iqk3Q03TIVmEUp0RmpMaKoP8SrcCahLD3XHuE6cMJLryialmAlW+pQgLK5o2P/zq+A==
 
 "@fontsource/poppins@^4.5.10":
   version "4.5.10"
