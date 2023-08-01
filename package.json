@@ -21,7 +21,7 @@
     "react-icons": "^4.10.1",
     "react-intl": "^6.4.3",
     "react-loading-icons": "^1.1.0",
-    "react-router-dom": "^6.12.0",
+    "react-router-dom": "^6.14.2",
     "react-show-more-text": "^1.6.2",
     "vite-plugin-svgr": "^3.2.0"
   },
