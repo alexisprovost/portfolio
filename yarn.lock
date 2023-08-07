@@ -549,10 +549,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/krona-one/-/krona-one-5.0.3.tgz#223306b27d284f1a674feb8bc22b28a5ddddd92e"
   integrity sha512-zCBOAqJw3N2AovfkRUKRDthBTIWLm4wPWMrtEPekCRWcpR87ge9KoHom38l695/TbXwgAxQtbMmXWm7SJS0UUQ==
 
-"@fontsource/poppins@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@fontsource/poppins/-/poppins-5.0.3.tgz#f4afa9aa5f491731decee76111c9b9622a9b7924"
-  integrity sha512-5lL2vmvmh4zbknTh1nVH9pTWyhYqAlYMHIAnkNhqo5qwMZGlr+coM1dtMwiQHRBgmHAl3ZvJ35Bj0s8cpmXZbg==
+"@fontsource/poppins@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/poppins/-/poppins-5.0.8.tgz#a1c5540aedb3719a36eba5c7c5dfaa3aed3c9f80"
+  integrity sha512-P8owfYWluoUY5Nyzk4gT/L6LmLmseP6ezFWhj6VBUa5pRIdnCvNJpoQ6i/vhekjtJOfqX6nKlB+LCttoUl2GQQ==
 
 "@formatjs/ecma402-abstract@1.17.0":
   version "1.17.0"
