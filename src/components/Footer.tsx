@@ -1,9 +1,9 @@
-import { FaTwitter, FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaEnvelope, FaCodepen, FaVimeo } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaCodepen, FaVimeo } from "react-icons/fa6";
 import { SiGithubsponsors } from "react-icons/si";
 import { GrStatusUnknown } from "react-icons/gr";
 import { ReactComponent as DevToLogo } from "../assets/icons/devto.svg";
+import { ReactComponent as X } from "../assets/icons/x.svg";
 
-import { LOCALES } from "../i18n/locales";
 import translate from "../i18n/translate";
 
 const Footer = () => {
@@ -38,8 +38,8 @@ const Footer = () => {
 								<FaLinkedin />
 							</a>
 
-							<a href="https://twitter.com/_alexisprovost" target="_blank" aria-label="Twitter">
-								<FaTwitter />
+							<a href="https://twitter.com/alexi_provo" target="_blank" aria-label="Twitter">
+								<X />
 							</a>
 
 							<a href="https://www.instagram.com/alexis.provost/" target="_blank" aria-label="Instagram">
