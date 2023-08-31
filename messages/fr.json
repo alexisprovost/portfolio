@@ -1,0 +1,45 @@
+{
+	"nav": {
+		"home": "Accueil",
+		"projects": "Mes Projets",
+		"contact": "Me Contacter"
+	},
+	"header": {
+		"jumbotron": {
+			"title": "Salut, je m'appelle Alexis",
+			"slogan": "Je suis un développeur Full Stack"
+		}
+	},
+	"home": {
+		"about": {
+			"title": "À Propos",
+			"description": "Je conçois des sites Web et j'apprend de nouvelles choses tous les jours. Je suis curieux de connaître l'avenir de la technologie et je me tiens informé des designs et des tendances actuelles.{br}{br}N'hésitez pas à me contacter si vous avez des questions ou des projets dont vous souhaitez discuter.",
+			"viewProjects": "Voir mes réalisations"
+		}
+	},
+	"project": {
+		"viewProject": "Voir le projet",
+		"viewProjectVideo": "Regarder sur YouTube",
+		"viewProjectGithub": "Voir sur GitHub",
+		"viewProjectImage": "Voir l'image du projet",
+		"projectNotReleased": "La sortie du projet est prévue pour le {date}",
+		"showMore": "Afficher plus",
+		"showLess": "{br}Afficher moins"
+	},
+	"contact": {
+		"title": "Formulaire de contact",
+		"subtitle": "Vous pouvez me contacter via ce formulaire et je receverai votre message sur discord",
+		"name": "Nom",
+		"email": "Email",
+		"message": "Message",
+		"submit": "Envoyer"
+	},
+	"footer": {
+		"madeWith": "Fait avec",
+		"english": "Switch to English"
+	},
+	"loading": {
+		"loading": "Chargement...",
+		"error": "Oups ! C'est embarrassant.{br}{br}Il semblerait que le backend soit en panne.{br}{br}N'hésite pas à réessayer dans un moment, ou à me contacter."
+	}
+}

@@ -2,8 +2,6 @@ import Nav from "./Nav";
 import Bonjour from "./Bonjour";
 import HeaderTitle from "./HeaderTitle";
 
-import { Routes, Route } from "react-router-dom";
-
 import translate from "../i18n/translate";
 
 const Header = ({ currentLocal, localeChanger }) => {

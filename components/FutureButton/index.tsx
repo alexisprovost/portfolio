@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
 import "./style.css";
+import Link from "next/link";
 
 interface FutureButtonProps {
 	text: string | JSX.Element;
@@ -12,7 +12,7 @@ interface FutureButtonProps {
 
 const FutureButton: FC<FutureButtonProps> = ({ text, color, textColor, to, className = "" }) => {
 	return (
-		<Link to={to}>
+		<Link href={to}>
 			<button className={`generic-button ${className}`} style={{ backgroundColor: color, color: textColor }}>
 				{text}
 			</button>

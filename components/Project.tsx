@@ -3,15 +3,16 @@ import "moment/dist/locale/fr";
 
 import ShowMoreText from "react-show-more-text";
 
-import translate from "../i18n/translate";
+import { useTranslations } from "next-intl";
 
-const Project = ({ p, currentLocal }) => {
+const Project = ({ p }) => {
+	const t = useTranslations("project");
+
 	const { img, name, date, technologies, description, url } = p;
 	let video = img + "?autoplay=1&loop=1&autopause=0&muted=1&background=1";
 
 	let momentDate = moment(date);
 	const datePassed = momentDate.isBefore(moment());
-	momentDate.locale(currentLocal);
 
 	let elementButton, elementMedia;
 
@@ -22,27 +23,27 @@ const Project = ({ p, currentLocal }) => {
 		if (youtubeRegex.test(url)) {
 			return {
 				linkClass: "project-link-youtube",
-				linkText: translate("app.project.viewProjectVideo"),
+				linkText: t("viewProjectVideo"),
 			};
 		}
 
 		if (url.includes("github")) {
 			return {
 				linkClass: "project-link-github",
-				linkText: translate("app.project.viewProjectGithub"),
+				linkText: t("viewProjectGithub"),
 			};
 		}
 
 		if (imageRegex.test(url)) {
 			return {
 				linkClass: "project-link-image",
-				linkText: translate("app.project.viewProjectImage"),
+				linkText: t("viewProjectImage"),
 			};
 		}
 
 		return {
 			linkClass: "",
-			linkText: translate("app.project.viewProject"),
+			linkText: t("viewProject"),
 		};
 	}
 
@@ -51,7 +52,7 @@ const Project = ({ p, currentLocal }) => {
 
 		if (!datePassed) {
 			linkClass += " project-link-disabled";
-			linkText = translate("app.project.projectNotReleased", { date: momentDate.format("LL") });
+			linkText = t("projectNotReleased", { date: momentDate.format("LL") });
 		}
 
 		elementButton = (
@@ -67,12 +68,7 @@ const Project = ({ p, currentLocal }) => {
 		if (vimeoRegex.test(img)) {
 			elementMedia = (
 				<div>
-					<iframe
-						src={video}
-						allow="autoplay; fullscreen; picture-in-picture"
-						title={name}
-						className="project-video"
-					></iframe>
+					<iframe src={video} allow="autoplay; fullscreen; picture-in-picture" title={name} className="project-video"></iframe>
 				</div>
 			);
 		} else {
@@ -101,12 +97,7 @@ const Project = ({ p, currentLocal }) => {
 						))}
 					</h6>
 					<div className="project-description">
-						<ShowMoreText
-							lines={6}
-							more={translate("app.project.showMore", { br: <br /> })}
-							less={translate("app.project.showLess", { br: <br /> })}
-							anchorClass="project-description-anchor"
-						>
+						<ShowMoreText lines={6} more={t("showMore", { br: <br /> })} less={t("showLess", { br: <br /> })} anchorClass="project-description-anchor">
 							{description}
 						</ShowMoreText>
 					</div>

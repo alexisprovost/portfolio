@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { IoLanguage } from "react-icons/io5";
-
-import translate from "../i18n/translate";
+"use client";
 import Dropdown from "./Dropdown";
+import Link from "next/link";
 
-import { LOCALES } from "../i18n/locales";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
-const Nav = ({ currentLocal, localeChanger }) => {
+const Nav = () => {
+	const t = useTranslations("nav");
+
 	const [toggled, setToggled] = useState(false);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -40,32 +40,19 @@ const Nav = ({ currentLocal, localeChanger }) => {
 			{(toggled || screenWidth > 768) && (
 				<ul className={screenWidth <= 768 ? "animate__animated animate__fadeInDown animate__faster" : ""}>
 					<li>
-						<Link to="/" onClick={toggleNav}>
-							{translate("app.nav.home")}
+						<Link href="/" onClick={toggleNav}>
+							{t("home")}
 						</Link>
 					</li>
 					<li>
-						<Link to="/projects" onClick={toggleNav}>
-							{translate("app.nav.projects")}
+						<Link href="/projects" onClick={toggleNav}>
+							{t("projects")}
 						</Link>
 					</li>
 					<li>
-						<Link to="/contact" onClick={toggleNav}>
-							{translate("app.nav.contact")}
+						<Link href="/contact" onClick={toggleNav}>
+							{t("contact")}
 						</Link>
-					</li>
-					<li>
-						{(currentLocal === LOCALES.FRENCH && (
-							<Dropdown
-								options={[{ text: "English", function: () => localeChanger(LOCALES.ENGLISH) }]}
-								label={<IoLanguage />}
-							/>
-						)) || (
-							<Dropdown
-								options={[{ text: "Français Canadien", function: () => localeChanger(LOCALES.FRENCH) }]}
-								label={<IoLanguage />}
-							/>
-						)}
 					</li>
 				</ul>
 			)}

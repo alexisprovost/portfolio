@@ -1,12 +1,10 @@
 import { FaTwitter, FaGithub, FaLinkedin, FaInstagram, FaYoutube, FaEnvelope, FaCodepen, FaVimeo } from "react-icons/fa";
 import { SiGithubsponsors } from "react-icons/si";
 import { GrStatusUnknown } from "react-icons/gr";
-import { ReactComponent as DevToLogo } from "../assets/icons/devto.svg";
-
-import { LOCALES } from "../i18n/locales";
-import translate from "../i18n/translate";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+	const t = useTranslations("footer");
 	return (
 		<footer>
 			<div className="footer-container">
@@ -15,7 +13,7 @@ const Footer = () => {
 						<li>Copyright Alexis Provost {new Date().getFullYear()}</li>
 						<li className="spacer"></li>
 						<li>
-							{translate("app.footer.madeWith")}{" "}
+							{t("madeWith")}{" "}
 							<a href="https://react.dev/" target="_blank">
 								React
 							</a>
@@ -24,10 +22,6 @@ const Footer = () => {
 						<div className="socials">
 							<a href="https://github.com/alexisprovost" target="_blank" aria-label="Github">
 								<FaGithub />
-							</a>
-
-							<a href="https://dev.to/alexisprovost" target="_blank" aria-label="Dev.to">
-								<DevToLogo />
 							</a>
 
 							<a href="https://codepen.io/alexisprovost" target="_blank" aria-label="Codepen">
