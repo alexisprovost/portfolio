@@ -33,12 +33,14 @@ const Projects = ({ currentLocal }) => {
 					headers: {
 						"Content-Type": "application/json",
 					},
-				}).then((res) => {
+				})
+					.then((res) => {
 						setError(false);
 						setProjects(res.data);
-				}).catch((error) => {
-					setError(true);
-				});
+					})
+					.catch((error) => {
+						setError(true);
+					});
 			})
 			.finally(() => {
 				setLoading(false);
@@ -49,6 +51,10 @@ const Projects = ({ currentLocal }) => {
 		getProjects("https://api.alexisprovost.com/");
 	}, [currentLocal]);
 
+	useEffect(() => {
+		window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+	}, []);
+
 	return (
 		<div className="gallery">
 			<div className="gallery-container">
@@ -56,17 +62,13 @@ const Projects = ({ currentLocal }) => {
 					<div className="loading" style={{ display: "flex", justifyContent: "center", padding: "0 0 4rem 0" }}>
 						<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 							<Oval strokeWidth="4" stroke="#fff" />
-							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>
-								{translate("app.loading")}
-							</p>
+							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>{translate("app.loading")}</p>
 						</div>
 					</div>
 				) : error ? (
 					<div className="loading" style={{ display: "flex", justifyContent: "center", padding: "0 0 4rem 0" }}>
 						<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>
-								{translate("app.loading.error", { br: <br /> })}
-							</p>
+							<p style={{ color: "#fff", marginTop: "1rem", padding: "1rem 0 0 0", textAlign: "center" }}>{translate("app.loading.error", { br: <br /> })}</p>
 						</div>
 					</div>
 				) : (
