@@ -61,5 +61,10 @@ export default {
     // Loading
     "app.loading": "Loading...",
     "app.loading.error": "Something went wrong.{br}{br}Please try again later or contact me directly.",
+
+    // 404
+    "app.notFound.title": "Page Not Found",
+    "app.notFound.description": "The page you're looking for doesn't exist or has been moved.",
+    "app.notFound.backHome": "Back Home",
   },
 };

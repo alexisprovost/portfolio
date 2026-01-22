@@ -61,5 +61,10 @@ export default {
     // Loading
     "app.loading": "Chargement...",
     "app.loading.error": "Oups ! Une erreur est survenue.{br}{br}N'hésitez pas à réessayer ou à me contacter directement.",
+
+    // 404
+    "app.notFound.title": "Page introuvable",
+    "app.notFound.description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "app.notFound.backHome": "Retour à l'accueil",
   },
 };

@@ -5,7 +5,7 @@ import { AnimatePresence } from "framer-motion";
 
 import "@/styles/main.css";
 
-import { HomePage, ProjectsPage, ContactPage } from "@/pages";
+import { HomePage, ProjectsPage, ContactPage, NotFoundPage } from "@/pages";
 
 import { I18nProvider } from "@/i18n";
 import getBrowserLocale from "@/hooks/getBrowserLocale";
@@ -57,6 +57,10 @@ const App = () => {
           <Route
             path="/contact"
             element={<ContactPage locale={locale} onLocaleChange={setLocale} />}
+          />
+          <Route
+            path="*"
+            element={<NotFoundPage locale={locale} onLocaleChange={setLocale} />}
           />
         </Routes>
       </AnimatePresence>
