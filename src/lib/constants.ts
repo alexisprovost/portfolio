@@ -45,7 +45,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     name: "TikTok",
-    url: "https://www.tiktok.com/@alexis.provost",
+    url: "https://www.tiktok.com/@provost.alexis",
     icon: FaTiktok,
     brandColor: "#000000",
   },

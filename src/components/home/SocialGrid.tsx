@@ -50,13 +50,13 @@ const SocialCard = ({ link }: SocialCardProps) => {
       variants={itemVariants}
       whileTap={{ scale: 0.95 }}
       className={cn(
-        "flex flex-col items-center justify-center gap-2",
+        "group flex flex-col items-center justify-center gap-2",
         "aspect-square rounded-2xl",
         "bg-linen border border-sand-dark/30",
         "transition-colors duration-200",
         "active:bg-sand-dark/20",
         // Desktop hover only
-        "@media(hover:hover):hover:border-accent/30 @media(hover:hover):hover:bg-accent/5",
+        "hover:border-accent/30 hover:bg-accent/5",
         "[html[data-theme='dark']_&]:bg-dark-linen",
         "[html[data-theme='dark']_&]:border-charcoal-light/20",
         "[html[data-theme='dark']_&]:active:bg-charcoal-light/20"
@@ -66,16 +66,15 @@ const SocialCard = ({ link }: SocialCardProps) => {
         <Icon
           className={cn(
             "w-full h-full",
-            "text-charcoal/60 [html[data-theme='dark']_&]:text-sand/60"
+            "text-charcoal [html[data-theme='dark']_&]:text-sand"
           )}
         />
-        {/* Colored overlay - visible on hover (desktop) or tap feedback */}
+        {/* Colored overlay - visible on hover (desktop) */}
         <span
           className={cn(
             "absolute inset-0 opacity-0",
             "transition-opacity duration-200",
-            // Show on desktop hover
-            "@media(hover:hover):group-hover:opacity-100"
+            "group-hover:opacity-100"
           )}
           style={getBrandStyle()}
         >
@@ -85,7 +84,7 @@ const SocialCard = ({ link }: SocialCardProps) => {
       <span
         className={cn(
           "text-xs font-medium",
-          "text-charcoal/50 [html[data-theme='dark']_&]:text-sand/50"
+          "text-charcoal/70 [html[data-theme='dark']_&]:text-sand/70"
         )}
       >
         {link.name}

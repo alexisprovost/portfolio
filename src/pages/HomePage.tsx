@@ -50,11 +50,12 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
         >
           <p
             className={cn(
-              "text-[11px] tracking-wider uppercase",
-              "text-charcoal/25 [html[data-theme='dark']_&]:text-sand/20"
+              "text-[11px] tracking-wider",
+              "text-charcoal/70 [html[data-theme='dark']_&]:text-sand/70",
+              "flex items-center justify-center gap-1.5"
             )}
           >
-            {new Date().getFullYear()} · QC
+            Made in Canada <span className="text-sm">🇨🇦</span>
           </p>
         </motion.footer>
       </div>

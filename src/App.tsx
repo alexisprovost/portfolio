@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
+import { AnimatePresence, motion } from "framer-motion";
 
 import "@/styles/main.css";
 
-import { PageTransition } from "@/components/layout";
 import { HomePage, ProjectsPage, ContactPage } from "@/pages";
 
 import { I18nProvider } from "@/i18n";
@@ -29,6 +29,8 @@ const App = () => {
     }
   }, []);
 
+  const location = useLocation();
+
   return (
     <I18nProvider locale={locale}>
       <Toaster
@@ -42,8 +44,8 @@ const App = () => {
           },
         }}
       />
-      <PageTransition>
-        <Routes>
+      <AnimatePresence mode="wait" initial={false}>
+        <Routes location={location} key={location.pathname}>
           <Route
             path="/"
             element={<HomePage locale={locale} onLocaleChange={setLocale} />}
@@ -57,7 +59,7 @@ const App = () => {
             element={<ContactPage locale={locale} onLocaleChange={setLocale} />}
           />
         </Routes>
-      </PageTransition>
+      </AnimatePresence>
     </I18nProvider>
   );
 };
