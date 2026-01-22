@@ -1,43 +1,71 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { Toaster } from "sonner";
+import { AnimatePresence } from "framer-motion";
 
-import "./App.css";
-import "animate.css";
-import "@fontsource/krona-one";
+import "@/styles/main.css";
 
-import Header from "./components/Header";
-import Home from "./views/Home";
-import Projects from "./views/Projects";
-import Contact from "./views/Contact";
-import Footer from "./components/Footer";
+import { HomePage, ProjectsPage, ContactPage, NotFoundPage } from "@/pages";
 
-import { I18nProvider } from "./i18n";
-
-import getBrowserLocale from "./hooks/getBrowserLocale";
-import WaveContainer from "./components/WaveContainer";
+import { I18nProvider } from "@/i18n";
+import getBrowserLocale from "@/hooks/getBrowserLocale";
 
 const App = () => {
-	const [locale, setLocale] = useState(getBrowserLocale());
+  const [locale, setLocale] = useState(getBrowserLocale());
 
-	useEffect(() => {
-		localStorage.setItem("locale", locale);
-	}, [locale]);
+  useEffect(() => {
+    localStorage.setItem("locale", locale);
+  }, [locale]);
 
-	return (
-		<I18nProvider locale={locale}>
-			<div className="App">
-				<Header currentLocal={locale} localeChanger={setLocale} />
-				<main>
-					<Routes>
-						<Route path="/" element={<WaveContainer page={<Home />} />} />
-						<Route path="/projects" element={<WaveContainer page={<Projects currentLocal={locale} />} />} />
-						<Route path="/contact" element={<WaveContainer page={<Contact />} />} />
-					</Routes>
-				</main>
-				<Footer />
-			</div>
-		</I18nProvider>
-	);
+  // Initialize theme on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("theme");
+    if (stored) {
+      document.documentElement.setAttribute("data-theme", stored);
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }, []);
+
+  const location = useLocation();
+
+  return (
+    <I18nProvider locale={locale}>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          className: "font-sans",
+          style: {
+            background: "var(--color-linen)",
+            border: "1px solid var(--color-sand-dark)",
+            color: "var(--color-charcoal)",
+          },
+        }}
+      />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={<HomePage locale={locale} onLocaleChange={setLocale} />}
+          />
+          <Route
+            path="/projects"
+            element={<ProjectsPage locale={locale} onLocaleChange={setLocale} />}
+          />
+          <Route
+            path="/contact"
+            element={<ContactPage locale={locale} onLocaleChange={setLocale} />}
+          />
+          <Route
+            path="*"
+            element={<NotFoundPage locale={locale} onLocaleChange={setLocale} />}
+          />
+        </Routes>
+      </AnimatePresence>
+    </I18nProvider>
+  );
 };
 
 export default App;

@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+@import "@fontsource/krona-one";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+@layer base {
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-sand text-charcoal;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  :root[data-theme="dark"] body {
+    @apply bg-warm-black text-sand;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Krona One", sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  #root {
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Mobile-optimized scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+    border-radius: 9999px;
+    opacity: 0.5;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08),
+                0 4px 16px -4px rgba(0, 0, 0, 0.06);
+  }
+
+  :root[data-theme="dark"] .shadow-soft {
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.4),
+                0 4px 16px -4px rgba(0, 0, 0, 0.3);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 0 1px var(--color-accent-muted),
+                0 4px 20px -4px var(--color-accent-muted);
+  }
+
+  /* Safe area padding for notched phones */
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* Hide scrollbar for horizontal scroll areas */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
