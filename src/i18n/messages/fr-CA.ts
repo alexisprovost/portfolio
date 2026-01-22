@@ -56,6 +56,7 @@ export default {
     // Footer
     "app.footer.madeWith": "Fait avec",
     "app.footer.madeInCanada": "Fait au Canada",
+    "app.footer.designedBy": "Conçu par M19.ca",
     "app.footer.english": "Switch to English",
 
     // Loading

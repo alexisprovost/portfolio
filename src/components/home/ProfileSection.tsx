@@ -54,21 +54,32 @@ export const ProfileSection = () => {
         )}
       >
         {translate(PROFILE.taglineKey)}
-        {PROFILE.workplace && (
+        {PROFILE.workplace?.name && (
           <>
             {" @ "}
-            <a
-              href={`https://x.com/${PROFILE.workplace.xUsername}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                "font-medium underline underline-offset-2",
-                "text-charcoal active:opacity-70 transition-opacity",
-                "[html[data-theme='dark']_&]:text-sand"
-              )}
-            >
-              {PROFILE.workplace.name}
-            </a>
+            {PROFILE.workplace.xUsername ? (
+              <a
+                href={`https://x.com/${PROFILE.workplace.xUsername}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "font-medium underline underline-offset-2",
+                  "text-charcoal active:opacity-70 transition-opacity",
+                  "[html[data-theme='dark']_&]:text-sand"
+                )}
+              >
+                {PROFILE.workplace.name}
+              </a>
+            ) : (
+              <span
+                className={cn(
+                  "font-medium",
+                  "text-charcoal [html[data-theme='dark']_&]:text-sand"
+                )}
+              >
+                {PROFILE.workplace.name}
+              </span>
+            )}
           </>
         )}
       </motion.p>

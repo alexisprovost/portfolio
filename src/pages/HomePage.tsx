@@ -44,20 +44,33 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
 
         {/* Footer */}
         <motion.footer
-          className="text-center pb-2"
+          className="text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.3 }}
         >
           <p
             className={cn(
-              "text-[11px] tracking-wider",
-              "text-charcoal/70 [html[data-theme='dark']_&]:text-sand/70",
+              "text-[11px] tracking-wide mb-1",
+              "text-charcoal/60 [html[data-theme='dark']_&]:text-sand/60",
               "flex items-center justify-center gap-1.5"
             )}
           >
             {translate("app.footer.madeInCanada")} <span className="text-sm">🇨🇦</span>
           </p>
+          <a
+            href="https://m19.ca"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              "text-[10px] tracking-wide",
+              "text-charcoal/30 [html[data-theme='dark']_&]:text-sand/30",
+              "hover:text-charcoal/50 [html[data-theme='dark']_&]:hover:text-sand/50",
+              "transition-colors"
+            )}
+          >
+            {translate("app.footer.designedBy")}
+          </a>
         </motion.footer>
       </div>
     </div>

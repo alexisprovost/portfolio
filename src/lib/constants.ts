@@ -81,6 +81,6 @@ export const PROFILE = {
   gravatar: "alexis@provost.cloud",
   workplace: {
     name: "UQAM",
-    xUsername: "UQAM",
+    xUsername: null,
   },
 };
