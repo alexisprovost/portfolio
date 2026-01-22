@@ -54,6 +54,23 @@ export const ProfileSection = () => {
         )}
       >
         {translate(PROFILE.taglineKey)}
+        {PROFILE.workplace && (
+          <>
+            {" @ "}
+            <a
+              href={`https://x.com/${PROFILE.workplace.xUsername}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "font-medium underline underline-offset-2",
+                "text-charcoal active:opacity-70 transition-opacity",
+                "[html[data-theme='dark']_&]:text-sand"
+              )}
+            >
+              {PROFILE.workplace.name}
+            </a>
+          </>
+        )}
       </motion.p>
     </motion.div>
   );

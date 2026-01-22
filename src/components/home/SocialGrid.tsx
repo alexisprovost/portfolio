@@ -37,8 +37,8 @@ const SocialCard = ({ link }: SocialCardProps) => {
       variants={itemVariants}
       whileTap={{ scale: 0.95 }}
       className={cn(
-        "group flex flex-col items-center justify-center gap-2",
-        "aspect-square rounded-2xl",
+        "group flex flex-col items-center justify-center gap-1.5",
+        "aspect-square rounded-xl",
         "bg-linen border border-sand-dark/30",
         "transition-colors duration-200",
         "active:bg-sand-dark/20",
@@ -49,7 +49,7 @@ const SocialCard = ({ link }: SocialCardProps) => {
         "[html[data-theme='dark']_&]:active:bg-charcoal-light/20"
       )}
     >
-      <div className="relative w-7 h-7 sm:w-8 sm:h-8">
+      <div className="relative w-6 h-6">
         <Icon
           className={cn(
             "w-full h-full",
@@ -88,7 +88,7 @@ export const SocialGrid = () => {
       initial="hidden"
       animate="visible"
     >
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5 sm:gap-3">
+      <div className="grid grid-cols-5 gap-2.5">
         {SOCIAL_LINKS.map((link) => (
           <SocialCard key={link.name} link={link} />
         ))}

@@ -79,4 +79,8 @@ export const PROFILE = {
   avatar: "/images/profile.jpg",
   instagram: "alexis.provost",
   gravatar: "alexis@provost.cloud",
+  workplace: {
+    name: "UQAM",
+    xUsername: "UQAM",
+  },
 };
