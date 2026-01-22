@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ProfileSection, SocialGrid, FeaturedLinks } from "@/components/home";
 import { ThemeToggle, LanguageToggle } from "@/components/shared";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import translate from "@/i18n/translate";
 import { cn } from "@/lib/utils";
 
 interface HomePageProps {
@@ -55,7 +56,7 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
               "flex items-center justify-center gap-1.5"
             )}
           >
-            Made in Canada <span className="text-sm">🇨🇦</span>
+            {translate("app.footer.madeInCanada")} <span className="text-sm">🇨🇦</span>
           </p>
         </motion.footer>
       </div>

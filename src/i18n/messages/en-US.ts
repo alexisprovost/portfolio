@@ -53,6 +53,7 @@ export default {
 
     // Footer
     "app.footer.madeWith": "Made with",
+    "app.footer.madeInCanada": "Made in Canada",
     "app.footer.french": "Voir en Français",
 
     // Loading
