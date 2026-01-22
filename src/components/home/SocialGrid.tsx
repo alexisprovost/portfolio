@@ -28,19 +28,6 @@ interface SocialCardProps {
 
 const SocialCard = ({ link }: SocialCardProps) => {
   const Icon = link.icon;
-  const isInstagram = link.brandColor === "instagram";
-
-  const getBrandStyle = () => {
-    if (isInstagram) {
-      return {
-        background: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        backgroundClip: "text",
-      } as React.CSSProperties;
-    }
-    return { color: link.brandColor };
-  };
 
   return (
     <motion.a
@@ -76,7 +63,7 @@ const SocialCard = ({ link }: SocialCardProps) => {
             "transition-opacity duration-200",
             "group-hover:opacity-100"
           )}
-          style={getBrandStyle()}
+          style={{ color: link.brandColor }}
         >
           <Icon className="w-full h-full" />
         </span>

@@ -1,8 +1,9 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { format, parseISO, isBefore } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
-import { FiExternalLink, FiGithub, FiYoutube, FiImage } from "react-icons/fi";
-import { GlassCard, Badge, Button } from "@/components/ui";
+import { FiExternalLink, FiGithub, FiYoutube, FiImage, FiChevronDown, FiArrowRight } from "react-icons/fi";
+import { GlassCard, Badge } from "@/components/ui";
 import translate from "@/i18n/translate";
 import { cn } from "@/lib/utils";
 
@@ -62,6 +63,8 @@ const getLinkProperties = (url: string) => {
 
 export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
   const { img, name, date, technologies, description, url } = project;
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const dateLocale = getDateLocale(locale);
   const parsedDate = parseISO(date);
   const isReleased = isBefore(parsedDate, new Date());
@@ -86,25 +89,26 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
       }}
     >
       <GlassCard className="overflow-hidden" hover={false}>
-        <div className="flex flex-col md:flex-row">
-          {/* Media Section */}
-          <div className="md:w-2/5 relative">
+        {/* Main row - fixed height */}
+        <div className="flex flex-col sm:flex-row sm:h-56">
+          {/* Media Section - Fixed height */}
+          <div className="sm:w-2/5 shrink-0 h-48 sm:h-full">
             {isVimeo && videoUrl ? (
               <iframe
                 src={videoUrl}
                 allow="autoplay; fullscreen; picture-in-picture"
                 title={name}
-                className="w-full h-48 md:h-full min-h-[200px] border-0"
+                className="w-full h-full border-0"
               />
             ) : img ? (
               <div
-                className="w-full h-48 md:h-full min-h-[200px] bg-cover bg-center bg-no-repeat"
+                className="w-full h-full bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${img})` }}
               />
             ) : (
               <div
                 className={cn(
-                  "w-full h-48 md:h-full min-h-[200px] flex items-center justify-center",
+                  "w-full h-full flex items-center justify-center",
                   "bg-gradient-to-br from-peach/20 to-coral/20",
                   "[html[data-theme='dark']_&]:from-warm-peach/20 [html[data-theme='dark']_&]:to-peach/20"
                 )}
@@ -116,11 +120,11 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
             )}
           </div>
 
-          {/* Content Section */}
-          <div className="md:w-3/5 p-5 md:p-6 flex flex-col">
+          {/* Content Section - Fixed height with overflow hidden */}
+          <div className="sm:w-3/5 p-5 flex flex-col overflow-hidden">
             <h3
               className={cn(
-                "text-xl font-display font-bold mb-2",
+                "text-lg font-display font-bold mb-1",
                 "text-charcoal [html[data-theme='dark']_&]:text-sand"
               )}
             >
@@ -129,15 +133,15 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
 
             <p
               className={cn(
-                "text-sm mb-3 capitalize",
-                "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
+                "text-xs mb-3 capitalize",
+                "text-charcoal-light [html[data-theme='dark']_&]:text-sand/50"
               )}
             >
               {formattedDate}
             </p>
 
             {/* Technologies */}
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1.5 mb-auto">
               {technologies.map((tech) => (
                 <Badge key={tech.id} variant="accent" size="sm">
                   {tech.name}
@@ -145,48 +149,82 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
               ))}
             </div>
 
-            {/* Description */}
-            <p
-              className={cn(
-                "text-sm leading-relaxed mb-4 flex-grow line-clamp-4",
-                "text-charcoal/80 [html[data-theme='dark']_&]:text-sand/70"
-              )}
-            >
-              {description}
-            </p>
+            {/* Footer row */}
+            <div className="flex items-center justify-between mt-auto pt-2">
+              {/* Action Link */}
+              {url && linkProps && isReleased ? (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "inline-flex items-center gap-1.5 text-sm font-medium",
+                    "text-accent active:opacity-70 transition-opacity",
+                    "[html[data-theme='dark']_&]:text-warm-peach"
+                  )}
+                >
+                  {LinkIcon && <LinkIcon className="w-4 h-4" />}
+                  {translate(linkProps.text)}
+                  <FiArrowRight className="w-3.5 h-3.5" />
+                </a>
+              ) : url && linkProps && !isReleased ? (
+                <span
+                  className={cn(
+                    "text-xs italic",
+                    "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
+                  )}
+                >
+                  {translate("app.project.projectNotReleased", {
+                    date: format(parsedDate, "PPP", { locale: dateLocale }),
+                  })}
+                </span>
+              ) : <span />}
 
-            {/* Action Button */}
-            {url && linkProps && (
-              <div className="mt-auto">
-                {isReleased ? (
-                  <Button
-                    as="a"
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    size="sm"
-                    showArrow
-                    className="w-full sm:w-auto"
+              {/* Show description toggle */}
+              {description && (
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className={cn(
+                    "flex items-center gap-1 text-xs font-medium",
+                    "text-charcoal/50 active:opacity-70 transition-opacity",
+                    "[html[data-theme='dark']_&]:text-sand/50"
+                  )}
+                >
+                  {translate(isExpanded ? "app.project.hideDescription" : "app.project.showDescription")}
+                  <motion.span
+                    animate={{ rotate: isExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    {LinkIcon && <LinkIcon className="w-4 h-4" />}
-                    {translate(linkProps.text)}
-                  </Button>
-                ) : (
-                  <span
-                    className={cn(
-                      "text-sm italic",
-                      "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
-                    )}
-                  >
-                    {translate("app.project.projectNotReleased", {
-                      date: format(parsedDate, "PPP", { locale: dateLocale }),
-                    })}
-                  </span>
-                )}
-              </div>
-            )}
+                    <FiChevronDown className="w-3 h-3" />
+                  </motion.span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
+
+        {/* Expanded description - below main card */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <div
+                className={cn(
+                  "px-5 pb-5 pt-3 text-sm leading-relaxed",
+                  "border-t border-sand-dark/20 [html[data-theme='dark']_&]:border-charcoal-light/20",
+                  "text-charcoal/80 [html[data-theme='dark']_&]:text-sand/70"
+                )}
+              >
+                {description}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </GlassCard>
     </motion.div>
   );

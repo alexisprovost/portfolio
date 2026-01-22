@@ -44,7 +44,7 @@ const App = () => {
           },
         }}
       />
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
             path="/"

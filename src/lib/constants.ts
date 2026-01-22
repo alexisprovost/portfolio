@@ -6,22 +6,11 @@ import {
   FaTiktok,
 } from "react-icons/fa6";
 
-// =============================================================================
-// SOCIAL LINKS CONFIGURATION
-// =============================================================================
-// To add a new social link:
-// 1. Import the icon from react-icons
-// 2. Add a new entry to SOCIAL_LINKS array below
-// 3. Set brand colors for consistent styling
-//
-// To remove a link: Simply delete or comment out the entry
-// =============================================================================
-
 export interface SocialLink {
   name: string;
   url: string;
   icon: React.ComponentType<{ className?: string }>;
-  brandColor: string; // Primary brand color for hover state
+  brandColor: string;
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
@@ -29,7 +18,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     name: "GitHub",
     url: "https://github.com/alexisprovost",
     icon: FaGithub,
-    brandColor: "#333333",
+    brandColor: "#6e5494", // GitHub purple
   },
   {
     name: "LinkedIn",
@@ -41,25 +30,21 @@ export const SOCIAL_LINKS: SocialLink[] = [
     name: "Instagram",
     url: "https://www.instagram.com/alexis.provost/",
     icon: FaInstagram,
-    brandColor: "instagram", // Special case for gradient
+    brandColor: "#E1306C", // Instagram pink
   },
   {
     name: "TikTok",
     url: "https://www.tiktok.com/@provost.alexis",
     icon: FaTiktok,
-    brandColor: "#000000",
+    brandColor: "#fe2c55", // TikTok red/pink
   },
   {
     name: "X",
     url: "https://twitter.com/alexi_provo",
     icon: FaXTwitter,
-    brandColor: "#000000",
+    brandColor: "#1DA1F2", // Twitter blue (more visible)
   },
 ];
-
-// =============================================================================
-// FEATURED LINKS (Navigation cards on homepage)
-// =============================================================================
 
 export interface FeaturedLink {
   id: string;
@@ -81,10 +66,6 @@ export const FEATURED_LINKS: FeaturedLink[] = [
   },
 ];
 
-// =============================================================================
-// API & PROFILE CONFIG
-// =============================================================================
-
 export const API_URLS = {
   projects: "https://api.alexisprovost.com/",
   fallback: "https://ap.m19.workers.dev/",
@@ -95,6 +76,7 @@ export const PROFILE = {
   name: "Alexis Provost",
   taglineKey: "app.header.jumbotron.slogan",
   email: "alexis@provost.cloud",
-  instagram: "alexis.provost", // Used for profile pic
-  gravatar: "alexis@provost.cloud", // Fallback for profile pic
+  avatar: "/images/profile.jpg",
+  instagram: "alexis.provost",
+  gravatar: "alexis@provost.cloud",
 };

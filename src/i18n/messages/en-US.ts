@@ -31,6 +31,8 @@ export default {
     "app.project.projectNotReleased": "This project is releasing on {date}",
     "app.project.showMore": "Show More",
     "app.project.showLess": "Show Less",
+    "app.project.showDescription": "Show Description",
+    "app.project.hideDescription": "Hide Description",
 
     // Contact
     "app.contact.title": "Get In Touch",
