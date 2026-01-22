@@ -1,0 +1,63 @@
+/* Native Californian 2026 Design System */
+
+@theme {
+  /* ==========================================================================
+     ACCENT COLOR - Change this to customize the site's highlight color
+     ========================================================================== */
+  --color-accent: #3B82F6;           /* Primary accent (blue) */
+  --color-accent-light: #60A5FA;     /* Lighter accent */
+  --color-accent-dark: #2563EB;      /* Darker accent */
+  --color-accent-muted: #3B82F620;   /* Accent with transparency */
+
+  /* ==========================================================================
+     LIGHT MODE COLORS
+     ========================================================================== */
+  --color-sand: #FAFAFA;
+  --color-linen: #FFFFFF;
+  --color-charcoal: #18181B;
+
+  /* ==========================================================================
+     DARK MODE COLORS
+     ========================================================================== */
+  --color-warm-black: #09090B;
+  --color-dark-linen: #18181B;
+
+  /* Neutral shades */
+  --color-charcoal-light: #52525B;
+  --color-charcoal-lighter: #71717A;
+  --color-sand-dark: #E4E4E7;
+  --color-sand-darker: #D4D4D8;
+
+  /* Legacy colors (keeping for compatibility) */
+  --color-peach: var(--color-accent-light);
+  --color-coral: var(--color-accent);
+  --color-warm-peach: var(--color-accent-light);
+
+  /* Typography */
+  --font-display: "Krona One", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Fluid font sizes */
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.813rem);
+  --font-size-sm: clamp(0.813rem, 0.75rem + 0.3vw, 0.875rem);
+  --font-size-base: clamp(0.875rem, 0.8rem + 0.4vw, 1rem);
+  --font-size-lg: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --font-size-xl: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+  --font-size-2xl: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+  --font-size-3xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  --font-size-4xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
+
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Z-index scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1050;
+}
