@@ -20,7 +20,7 @@
     "react-icons": "^5.0.0",
     "react-intl": "^6.6.0",
     "react-router-dom": "^6.21.0",
-    "sonner": "^1.3.0"
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0-beta.0",
