@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
@@ -15,20 +15,29 @@ export const ThemeToggle = ({ className }: ThemeToggleProps) => {
     <motion.button
       onClick={toggleTheme}
       className={cn(
-        "w-10 h-10 flex items-center justify-center",
-        "rounded-xl",
-        "bg-linen border border-sand-dark/30",
-        "text-charcoal/70",
-        "active:scale-95 transition-transform",
-        "[html[data-theme='dark']_&]:bg-dark-linen",
-        "[html[data-theme='dark']_&]:border-charcoal-light/20",
-        "[html[data-theme='dark']_&]:text-sand/70",
+        "relative w-10 h-10 flex items-center justify-center overflow-hidden",
+        "rounded-full",
+        "bg-black/5 backdrop-blur-sm",
+        "[html[data-theme='dark']_&]:bg-white/5",
         className
       )}
-      whileTap={{ scale: 0.92 }}
+      whileTap={{ scale: 0.9 }}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={isDark ? "sun" : "moon"}
+          initial={{ y: -20, opacity: 0, rotate: -90 }}
+          animate={{ y: 0, opacity: 1, rotate: 0 }}
+          exit={{ y: 20, opacity: 0, rotate: 90 }}
+          transition={{ duration: 0.2 }}
+          className={cn(
+            "text-charcoal/70 [html[data-theme='dark']_&]:text-sand/70"
+          )}
+        >
+          {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
+        </motion.div>
+      </AnimatePresence>
     </motion.button>
   );
 };

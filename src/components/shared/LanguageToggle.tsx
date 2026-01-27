@@ -15,29 +15,47 @@ export const LanguageToggle = ({
 }: LanguageToggleProps) => {
   const isEnglish = locale === LOCALES.ENGLISH;
 
-  const toggleLanguage = () => {
-    onChange(isEnglish ? LOCALES.FRENCH : LOCALES.ENGLISH);
-  };
-
   return (
-    <motion.button
-      onClick={toggleLanguage}
+    <div
       className={cn(
-        "h-10 px-3.5 flex items-center justify-center",
-        "rounded-xl",
-        "bg-linen border border-sand-dark/30",
-        "text-charcoal/70 text-sm font-medium",
-        "active:scale-95 transition-transform",
-        "[html[data-theme='dark']_&]:bg-dark-linen",
-        "[html[data-theme='dark']_&]:border-charcoal-light/20",
-        "[html[data-theme='dark']_&]:text-sand/70",
+        "relative flex items-center h-10 p-1 rounded-full",
+        "bg-black/5 backdrop-blur-sm",
+        "[html[data-theme='dark']_&]:bg-white/5",
         className
       )}
-      whileTap={{ scale: 0.92 }}
-      aria-label={isEnglish ? "Passer en français" : "Switch to English"}
     >
-      {isEnglish ? "FR" : "EN"}
-    </motion.button>
+      <motion.div
+        className={cn(
+          "absolute h-8 w-10 rounded-full",
+          "bg-white shadow-sm",
+          "[html[data-theme='dark']_&]:bg-white/15"
+        )}
+        animate={{ x: isEnglish ? 0 : 40 }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      />
+      <button
+        onClick={() => onChange(LOCALES.ENGLISH)}
+        className={cn(
+          "relative z-10 w-10 h-8 text-xs font-semibold rounded-full transition-colors",
+          isEnglish
+            ? "text-charcoal [html[data-theme='dark']_&]:text-sand"
+            : "text-charcoal/40 [html[data-theme='dark']_&]:text-sand/40"
+        )}
+      >
+        EN
+      </button>
+      <button
+        onClick={() => onChange(LOCALES.FRENCH)}
+        className={cn(
+          "relative z-10 w-10 h-8 text-xs font-semibold rounded-full transition-colors",
+          !isEnglish
+            ? "text-charcoal [html[data-theme='dark']_&]:text-sand"
+            : "text-charcoal/40 [html[data-theme='dark']_&]:text-sand/40"
+        )}
+      >
+        FR
+      </button>
+    </div>
   );
 };
 
