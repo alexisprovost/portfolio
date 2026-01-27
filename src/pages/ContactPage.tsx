@@ -131,7 +131,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <GlassCard className="p-6 sm:p-8">
+        <GlassCard className="p-6 sm:p-8" hover={false}>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="name" className={labelClasses}>
