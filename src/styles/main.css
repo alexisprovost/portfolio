@@ -66,6 +66,12 @@
   :root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.12);
   }
+  
+  :root[data-theme="dark"] iframe[src*="spotify"] {
+    border-radius: 12px;
+    color-scheme: dark;
+    background: #121212;
+  }
 
   /* Firefox scrollbar */
   * {

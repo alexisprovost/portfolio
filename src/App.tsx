@@ -110,7 +110,7 @@ const Fx = ({ active }: { active: boolean }) => {
               ‹
             </span>
           </div>
-          <div ref={embedRef} className="w-[300px] h-[80px]" />
+          <div ref={embedRef} className="w-[300px] h-[80px] bg-[#121212] [&>iframe]:rounded-none" />
         </div>
       </motion.div>
     </>
