@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { SOCIAL_LINKS, type SocialLink } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -13,7 +13,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -38,7 +38,7 @@ const SocialCard = ({ link }: SocialCardProps) => {
       whileTap={{ scale: 0.95 }}
       className={cn(
         "group flex flex-col items-center justify-center gap-1.5",
-        "aspect-square rounded-xl",
+        "aspect-square rounded-xl px-1",
         "bg-linen border border-sand-dark/30",
         "transition-colors duration-200",
         "active:bg-sand-dark/20",
