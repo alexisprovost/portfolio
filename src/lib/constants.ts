@@ -18,7 +18,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     name: "GitHub",
     url: "https://github.com/alexisprovost",
     icon: FaGithub,
-    brandColor: "#6e5494", // GitHub purple
+    brandColor: "#181717",
   },
   {
     name: "LinkedIn",
@@ -30,19 +30,19 @@ export const SOCIAL_LINKS: SocialLink[] = [
     name: "Instagram",
     url: "https://www.instagram.com/alexis.provost/",
     icon: FaInstagram,
-    brandColor: "#E1306C", // Instagram pink
+    brandColor: "instagram",
   },
   {
     name: "TikTok",
     url: "https://www.tiktok.com/@provost.alexis",
     icon: FaTiktok,
-    brandColor: "#fe2c55", // TikTok red/pink
+    brandColor: "#000000",
   },
   {
     name: "X",
     url: "https://twitter.com/alexi_provo",
     icon: FaXTwitter,
-    brandColor: "#1DA1F2", // Twitter blue (more visible)
+    brandColor: "#000000",
   },
 ];
 

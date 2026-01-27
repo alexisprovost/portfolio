@@ -28,6 +28,8 @@ interface SocialCardProps {
 
 const SocialCard = ({ link }: SocialCardProps) => {
   const Icon = link.icon;
+  const isInstagram = link.brandColor === "instagram";
+  const isDarkColor = ["#000000", "#181717"].includes(link.brandColor);
 
   return (
     <motion.a
@@ -61,9 +63,10 @@ const SocialCard = ({ link }: SocialCardProps) => {
           className={cn(
             "absolute inset-0 opacity-0",
             "transition-opacity duration-200",
-            "group-hover:opacity-100"
+            "group-hover:opacity-100",
+            isDarkColor && "[html[data-theme='dark']_&]:invert"
           )}
-          style={{ color: link.brandColor }}
+          style={{ color: isInstagram ? "#E1306C" : link.brandColor }}
         >
           <Icon className="w-full h-full" />
         </span>

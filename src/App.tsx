@@ -137,8 +137,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    (window as Window & { fx?: () => void }).fx = fxGo;
-  }, [fxGo]);
+    const w = window as Window & { fx?: () => void; fxOn?: boolean };
+    w.fx = fxGo;
+    w.fxOn = fxOn;
+  }, [fxGo, fxOn]);
 
   const location = useLocation();
 

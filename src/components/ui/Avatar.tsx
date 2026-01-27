@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
@@ -18,14 +18,19 @@ const sizes = {
 
 const g = () => atob("aHR0cHM6Ly9pbWcuc3Nob3J0Lm5ldC9pL1dKUHIucG5n");
 
+const getFxOn = () => (window as Window & { fxOn?: boolean }).fxOn ?? false;
+const subscribe = (cb: () => void) => {
+  const interval = setInterval(cb, 100);
+  return () => clearInterval(interval);
+};
+
 export const Avatar = ({ size = "lg", className }: AvatarProps) => {
   const [imgError, setImgError] = useState(false);
-  const [altSrc, setAltSrc] = useState<string | null>(null);
+  const fxActive = useSyncExternalStore(subscribe, getFxOn, () => false);
   const c = useRef(0);
   const t = useRef(0);
 
   const trigger = useCallback(() => {
-    setAltSrc(g());
     (window as Window & { fx?: () => void }).fx?.();
 
     const duration = 3000;
@@ -84,9 +89,11 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
 
   const showImage = PROFILE.avatar && !imgError;
 
+  const altSrc = fxActive ? g() : null;
+
   return (
     <div className="relative">
-      {altSrc && (
+      {fxActive && (
         <motion.div
           className="absolute -inset-6 rounded-full"
           initial={{ opacity: 0 }}
