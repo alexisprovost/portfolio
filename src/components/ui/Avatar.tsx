@@ -145,20 +145,60 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
 
   return (
     <>
-      <motion.div
-        className={cn(
-          "relative rounded-full overflow-hidden cursor-pointer select-none",
-          !showImage && "bg-gradient-to-br from-accent via-accent-light to-accent",
-          "shadow-glow",
-          sizes[size],
-          className
+      {/* Aurora background */}
+      {altSrc && (
+        <motion.div
+          className="fixed -inset-[10%] z-0 pointer-events-none"
+          initial={{ opacity: 0, scale: 1, rotate: 0 }}
+          animate={{
+            opacity: 1,
+            scale: [1, 1.1, 1],
+            rotate: [0, 5, -5, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.6 },
+            scale: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+          }}
+          style={{
+            filter: "blur(30px) saturate(105%)",
+            background: "radial-gradient(50% 60% at 15% 20%, #38bdf82e 0%, #38bdf800 60%), radial-gradient(40% 50% at 85% 30%, #6366f124 0%, #6366f100 60%), radial-gradient(60% 60% at 50% 95%, #3b82f61f 0%, #3b82f600 60%)",
+          }}
+        />
+      )}
+      <div className="relative">
+        {altSrc && (
+          <motion.div
+            className="absolute -inset-6 rounded-full"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              rotate: 360,
+            }}
+            transition={{
+              opacity: { duration: 0.6 },
+              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+            }}
+            style={{
+              filter: "blur(16px)",
+              background: "radial-gradient(circle at 30% 30%, rgba(56,189,248,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(99,102,241,0.3) 0%, transparent 50%), radial-gradient(circle at 50% 80%, rgba(59,130,246,0.3) 0%, transparent 50%)",
+            }}
+          />
         )}
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        onClick={handleClick}
-        whileTap={{ scale: 0.95 }}
-      >
+        <motion.div
+          className={cn(
+            "relative rounded-full overflow-hidden cursor-pointer select-none",
+            !showImage && "bg-gradient-to-br from-accent via-accent-light to-accent",
+            "shadow-glow",
+            sizes[size],
+            className
+          )}
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          onClick={handleClick}
+          whileTap={{ scale: 0.95 }}
+        >
         {showImage ? (
           <>
             <img
@@ -192,7 +232,8 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
             </span>
           </div>
         )}
-      </motion.div>
+        </motion.div>
+      </div>
       {showPlayer && (
         <motion.div
           className="fixed bottom-4 right-0 z-50 flex items-center touch-manipulation cursor-grab active:cursor-grabbing"
