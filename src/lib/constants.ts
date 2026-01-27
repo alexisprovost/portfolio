@@ -50,6 +50,7 @@ export interface FeaturedLink {
   id: string;
   labelKey: string;
   to: string;
+  icon: string;
   external?: boolean;
 }
 
@@ -58,11 +59,13 @@ export const FEATURED_LINKS: FeaturedLink[] = [
     id: "projects",
     labelKey: "app.home.featured.projects",
     to: "/projects",
+    icon: "folder",
   },
   {
     id: "contact",
     labelKey: "app.home.featured.contact",
     to: "/contact",
+    icon: "mail",
   },
 ];
 

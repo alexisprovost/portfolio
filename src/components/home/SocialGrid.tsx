@@ -70,7 +70,7 @@ const SocialCard = ({ link }: SocialCardProps) => {
       </div>
       <span
         className={cn(
-          "text-xs font-medium",
+          "text-[10px] sm:text-xs font-medium truncate max-w-full",
           "text-charcoal/70 [html[data-theme='dark']_&]:text-sand/70"
         )}
       >
@@ -88,7 +88,7 @@ export const SocialGrid = () => {
       initial="hidden"
       animate="visible"
     >
-      <div className="grid grid-cols-5 gap-2.5">
+      <div className="grid grid-cols-5 gap-1.5 sm:gap-2.5">
         {SOCIAL_LINKS.map((link) => (
           <SocialCard key={link.name} link={link} />
         ))}

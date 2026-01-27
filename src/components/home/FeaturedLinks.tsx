@@ -1,9 +1,14 @@
 import { motion, Variants } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FiChevronRight } from "react-icons/fi";
+import { FiChevronRight, FiFolder, FiMail } from "react-icons/fi";
 import { FEATURED_LINKS } from "@/lib/constants";
 import translate from "@/i18n/translate";
 import { cn } from "@/lib/utils";
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  folder: FiFolder,
+  mail: FiMail,
+};
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -49,14 +54,30 @@ export const FeaturedLinks = () => {
                 "[html[data-theme='dark']_&]:group-hover:border-accent/30"
               )}
             >
-              <span
-                className={cn(
-                  "font-medium text-base",
-                  "text-charcoal [html[data-theme='dark']_&]:text-sand"
+              <div className="flex items-center gap-3">
+                {iconMap[link.icon] && (
+                  (() => {
+                    const Icon = iconMap[link.icon];
+                    return (
+                      <Icon
+                        className={cn(
+                          "w-5 h-5",
+                          "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60",
+                          "group-hover:text-accent"
+                        )}
+                      />
+                    );
+                  })()
                 )}
-              >
-                {translate(link.labelKey)}
-              </span>
+                <span
+                  className={cn(
+                    "font-medium text-base",
+                    "text-charcoal [html[data-theme='dark']_&]:text-sand"
+                  )}
+                >
+                  {translate(link.labelKey)}
+                </span>
+              </div>
               <FiChevronRight
                 className={cn(
                   "w-5 h-5 transition-transform duration-200",
