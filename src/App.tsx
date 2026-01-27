@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import "@/styles/main.css";
 
 import { HomePage, ProjectsPage, ContactPage, NotFoundPage } from "@/pages";
+import { CookieBanner } from "@/components/shared";
 
 import { I18nProvider } from "@/i18n";
 import getBrowserLocale from "@/hooks/getBrowserLocale";
@@ -178,6 +179,7 @@ const App = () => {
           />
         </Routes>
       </AnimatePresence>
+      <CookieBanner />
     </I18nProvider>
   );
 };
