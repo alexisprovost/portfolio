@@ -19,4 +19,14 @@ export default defineConfig({
       "@pages": resolve(__dirname, "./src/pages"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "react-router-dom"],
+          animations: ["framer-motion"],
+        },
+      },
+    },
+  },
 });

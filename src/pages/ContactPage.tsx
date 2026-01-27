@@ -62,12 +62,12 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
 
   const inputClasses = cn(
     "w-full px-4 py-3 rounded-xl transition-all duration-300",
-    "bg-linen border border-sand-dark/30",
+    "backdrop-blur-md bg-black/5 border border-black/20",
     "text-charcoal placeholder:text-charcoal/40",
-    "focus:outline-none focus:ring-2 focus:ring-peach/50 focus:border-peach",
-    "[html[data-theme='dark']_&]:bg-dark-linen [html[data-theme='dark']_&]:border-warm-black/30",
+    "focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/30",
+    "[html[data-theme='dark']_&]:bg-black/30 [html[data-theme='dark']_&]:border-white/10",
     "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:placeholder:text-sand/40",
-    "[html[data-theme='dark']_&]:focus:ring-warm-peach/50 [html[data-theme='dark']_&]:focus:border-warm-peach"
+    "[html[data-theme='dark']_&]:focus:ring-white/20 [html[data-theme='dark']_&]:focus:border-white/20"
   );
 
   const labelClasses = cn(
@@ -131,7 +131,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <GlassCard className="p-6 sm:p-8">
+        <GlassCard className="p-6 sm:p-8" hover={false}>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="name" className={labelClasses}>
@@ -174,7 +174,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
 
             <Button
               type="submit"
-              size="lg"
+              size="md"
               className="w-full"
               disabled={isSubmitting}
             >

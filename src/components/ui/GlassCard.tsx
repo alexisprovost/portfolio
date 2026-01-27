@@ -16,10 +16,10 @@ export const GlassCard = ({
   return (
     <motion.div
       className={cn(
-        "rounded-2xl backdrop-blur-md",
-        "bg-linen/80 border border-sand-dark/50",
-        "[html[data-theme='dark']_&]:bg-dark-linen/80 [html[data-theme='dark']_&]:border-warm-black/50",
-        hover && "transition-all duration-300 hover:scale-[1.02] shadow-warm hover:shadow-warm-lg",
+        "rounded-2xl backdrop-blur-xl",
+        "bg-white/40 border border-white/50 shadow-lg",
+        "[html[data-theme='dark']_&]:bg-white/5 [html[data-theme='dark']_&]:border-white/10",
+        hover && "transition-all duration-300 hover:scale-[1.02] hover:shadow-xl",
         glow && "animate-glow",
         className
       )}

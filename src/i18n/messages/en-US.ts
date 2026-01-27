@@ -67,5 +67,9 @@ export default {
     "app.notFound.title": "Page Not Found",
     "app.notFound.description": "The page you're looking for doesn't exist or has been moved.",
     "app.notFound.backHome": "Back Home",
+
+    // Cookie
+    "app.cookie.message": "We use cookies to improve your experience.",
+    "app.cookie.ok": "Got it",
   },
 };

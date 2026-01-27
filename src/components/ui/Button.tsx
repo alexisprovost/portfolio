@@ -35,10 +35,10 @@ type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsAnchor;
 
 const variants: Record<ButtonVariant, string> = {
   primary: cn(
-    "bg-gradient-to-r from-peach to-coral text-charcoal font-medium",
-    "hover:from-coral hover:to-peach hover:shadow-warm-lg",
-    "[html[data-theme='dark']_&]:from-warm-peach [html[data-theme='dark']_&]:to-peach",
-    "[html[data-theme='dark']_&]:text-warm-black"
+    "bg-charcoal text-sand font-medium shadow-md",
+    "hover:bg-charcoal/90 hover:shadow-lg",
+    "[html[data-theme='dark']_&]:bg-sand [html[data-theme='dark']_&]:text-charcoal",
+    "[html[data-theme='dark']_&]:hover:bg-sand/90"
   ),
   secondary: cn(
     "bg-linen text-charcoal border border-sand-dark",

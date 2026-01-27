@@ -67,5 +67,9 @@ export default {
     "app.notFound.title": "Page introuvable",
     "app.notFound.description": "La page que vous recherchez n'existe pas ou a été déplacée.",
     "app.notFound.backHome": "Retour à l'accueil",
+
+    // Cookie
+    "app.cookie.message": "Nous utilisons des cookies pour améliorer votre expérience.",
+    "app.cookie.ok": "Compris",
   },
 };

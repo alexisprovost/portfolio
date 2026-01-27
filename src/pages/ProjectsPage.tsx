@@ -22,6 +22,13 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -59,30 +66,40 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   }, []);
 
   return (
-    <PageLayout maxWidth="lg">
-      {/* Header */}
+    <>
+      {/* Fixed Header */}
       <motion.div
-        className="flex justify-between items-center mb-8"
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 px-5 sm:px-6 py-4 transition-colors duration-200",
+          "border-b border-transparent",
+          scrolled && "backdrop-blur-md bg-sand/80 border-sand-dark/30 [html[data-theme='dark']_&]:bg-warm-black/80 [html[data-theme='dark']_&]:border-charcoal-light/20"
+        )}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <Link
-          to="/"
-          className={cn(
-            "flex items-center gap-2 text-sm font-medium transition-colors",
-            "text-charcoal hover:text-coral",
-            "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:hover:text-warm-peach"
-          )}
-        >
-          <FiArrowLeft />
-          {translate("app.nav.home")}
-        </Link>
+        <div className="flex justify-between items-center max-w-4xl mx-auto">
+          <Link
+            to="/"
+            className={cn(
+              "flex items-center gap-2 text-sm font-medium transition-colors",
+              "text-charcoal hover:text-coral",
+              "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:hover:text-warm-peach"
+            )}
+          >
+            <FiArrowLeft />
+            {translate("app.nav.home")}
+          </Link>
 
-        <div className="flex items-center gap-2">
-          <LanguageToggle locale={locale} onChange={onLocaleChange} />
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageToggle locale={locale} onChange={onLocaleChange} />
+            <ThemeToggle />
+          </div>
         </div>
       </motion.div>
+
+      <PageLayout maxWidth="lg">
+        {/* Spacer for fixed header */}
+        <div className="h-14" />
 
       {/* Title */}
       <motion.div
@@ -141,6 +158,7 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
         </div>
       )}
     </PageLayout>
+    </>
   );
 };
 

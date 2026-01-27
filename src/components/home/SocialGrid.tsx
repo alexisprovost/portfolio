@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { SOCIAL_LINKS, type SocialLink } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -13,7 +13,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -28,6 +28,8 @@ interface SocialCardProps {
 
 const SocialCard = ({ link }: SocialCardProps) => {
   const Icon = link.icon;
+  const isInstagram = link.brandColor === "instagram";
+  const isDarkColor = ["#000000", "#181717"].includes(link.brandColor);
 
   return (
     <motion.a
@@ -38,7 +40,7 @@ const SocialCard = ({ link }: SocialCardProps) => {
       whileTap={{ scale: 0.95 }}
       className={cn(
         "group flex flex-col items-center justify-center gap-1.5",
-        "aspect-square rounded-xl",
+        "aspect-square rounded-xl px-1",
         "bg-linen border border-sand-dark/30",
         "transition-colors duration-200",
         "active:bg-sand-dark/20",
@@ -61,16 +63,17 @@ const SocialCard = ({ link }: SocialCardProps) => {
           className={cn(
             "absolute inset-0 opacity-0",
             "transition-opacity duration-200",
-            "group-hover:opacity-100"
+            "group-hover:opacity-100",
+            isDarkColor && "[html[data-theme='dark']_&]:invert"
           )}
-          style={{ color: link.brandColor }}
+          style={{ color: isInstagram ? "#E1306C" : link.brandColor }}
         >
           <Icon className="w-full h-full" />
         </span>
       </div>
       <span
         className={cn(
-          "text-xs font-medium",
+          "text-[10px] sm:text-xs font-medium truncate max-w-full",
           "text-charcoal/70 [html[data-theme='dark']_&]:text-sand/70"
         )}
       >
@@ -88,7 +91,7 @@ export const SocialGrid = () => {
       initial="hidden"
       animate="visible"
     >
-      <div className="grid grid-cols-5 gap-2.5">
+      <div className="grid grid-cols-5 gap-1.5 sm:gap-2.5">
         {SOCIAL_LINKS.map((link) => (
           <SocialCard key={link.name} link={link} />
         ))}
