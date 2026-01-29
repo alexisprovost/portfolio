@@ -24,12 +24,13 @@ export const PageLayout = ({
   return (
     <div
       className={cn(
-        "min-h-screen w-full px-4 py-8 sm:px-6 lg:px-8",
+        "min-h-screen min-h-dvh w-full px-4 py-8 sm:px-6 lg:px-8",
         "bg-sand transition-colors duration-300",
         "[html[data-theme='dark']_&]:bg-warm-black",
         centered && "flex flex-col items-center",
         className
       )}
+      style={{ minHeight: '-webkit-fill-available' }}
     >
       <div className={cn("w-full", maxWidths[maxWidth])}>{children}</div>
     </div>

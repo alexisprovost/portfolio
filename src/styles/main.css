@@ -20,6 +20,7 @@
     transition: background-color 0.2s ease, color 0.2s ease;
     overflow-x: hidden;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     min-height: 100dvh;
   }
 
@@ -35,7 +36,10 @@
   #root {
     overflow-x: hidden;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Modern minimal scrollbar */
@@ -67,10 +71,16 @@
     background: rgba(255, 255, 255, 0.12);
   }
   
-  :root[data-theme="dark"] iframe[src*="spotify"] {
+  /* Spotify player - always dark regardless of theme */
+  iframe[src*="spotify"] {
     border-radius: 12px;
-    color-scheme: dark;
-    background: #121212;
+    color-scheme: dark !important;
+    background: #121212 !important;
+  }
+  
+  /* Ensure the spotify embed container stays dark */
+  [id*="spotify"] {
+    background: #121212 !important;
   }
 
   /* Firefox scrollbar */
