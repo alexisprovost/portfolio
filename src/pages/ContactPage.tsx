@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useIntl } from "react-intl";
 import { toast } from "sonner";
-import { FiArrowLeft, FiSend } from "react-icons/fi";
+import { FiArrowLeft, FiSend, FiCheck, FiAlertCircle } from "react-icons/fi";
 import { useWebHaptics } from "web-haptics/react";
 import { PageLayout } from "@/components/layout";
-import { GlassCard, Button } from "@/components/ui";
+import { GlassCard } from "@/components/ui";
 import { ThemeToggle, LanguageToggle } from "@/components/shared";
-import { API_URLS } from "@/lib/constants";
 import translate from "@/i18n/translate";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import { cn } from "@/lib/utils";
@@ -18,72 +17,136 @@ interface ContactPageProps {
   onLocaleChange: (locale: string) => void;
 }
 
+type FormStatus = "idle" | "submitting" | "success" | "error";
+
 export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
   useDocumentTitle("Contact");
 
+  const intl = useIntl();
   const haptic = useWebHaptics();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const renderTurnstile = useCallback(() => {
+    const w = window as Window & { turnstile?: any };
+    if (!w.turnstile || !turnstileRef.current) return;
+    if (turnstileWidgetId.current !== null) {
+      w.turnstile.remove(turnstileWidgetId.current);
+    }
+    turnstileWidgetId.current = w.turnstile.render(turnstileRef.current, {
+      sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
+      theme:
+        document.documentElement.getAttribute("data-theme") === "dark"
+          ? "dark"
+          : "light",
+      size: "flexible",
+    });
+  }, []);
+
+  useEffect(() => {
+    const w = window as Window & { turnstile?: any };
+    if (w.turnstile) {
+      renderTurnstile();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src =
+      "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit";
+    script.async = true;
+    (window as any).onTurnstileLoad = renderTurnstile;
+    document.head.appendChild(script);
+
+    return () => {
+      (window as any).onTurnstileLoad = undefined;
+    };
+  }, [renderTurnstile]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
+
+    const w = window as Window & { turnstile?: any };
+    const token = w.turnstile?.getResponse(turnstileWidgetId.current);
+
+    if (!token) {
+      haptic.trigger("warning");
+      toast.error(intl.formatMessage({ id: "app.contact.error.title" }), {
+        description: intl.formatMessage({
+          id: "app.contact.error.verification",
+        }),
+      });
+      return;
+    }
+
+    setStatus("submitting");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-    };
 
     try {
-      await axios.post(API_URLS.contact, data, {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          message: formData.get("message"),
+          token,
+        }),
       });
 
+      if (!res.ok) throw new Error();
+
+      setStatus("success");
       haptic.trigger("success");
       toast.success(
-        locale.startsWith("fr") ? "Message envoyé!" : "Message sent!",
+        intl.formatMessage({ id: "app.contact.success.title" }),
         {
-          description: locale.startsWith("fr")
-            ? "Votre message a bien été envoyé"
-            : "Your message has been sent successfully",
+          description: intl.formatMessage({
+            id: "app.contact.success.message",
+          }),
         }
       );
 
       form.reset();
+      w.turnstile?.reset(turnstileWidgetId.current);
+
+      setTimeout(() => setStatus("idle"), 3000);
     } catch {
+      setStatus("error");
       haptic.trigger("error");
-      toast.error(locale.startsWith("fr") ? "Erreur" : "Error", {
-        description: locale.startsWith("fr")
-          ? "Une erreur est survenue. Veuillez réessayer."
-          : "An error occurred. Please try again.",
+      toast.error(intl.formatMessage({ id: "app.contact.error.title" }), {
+        description: intl.formatMessage({ id: "app.contact.error.message" }),
       });
-    } finally {
-      setIsSubmitting(false);
+
+      setTimeout(() => setStatus("idle"), 3000);
     }
   };
 
   const inputClasses = cn(
-    "w-full px-4 py-3 rounded-xl transition-all duration-300",
-    "backdrop-blur-md bg-black/5 border border-black/20",
-    "text-charcoal placeholder:text-charcoal/40",
-    "focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-black/30",
-    "[html[data-theme='dark']_&]:bg-black/30 [html[data-theme='dark']_&]:border-white/10",
-    "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:placeholder:text-sand/40",
-    "[html[data-theme='dark']_&]:focus:ring-white/20 [html[data-theme='dark']_&]:focus:border-white/20"
+    "w-full px-4 py-3.5 rounded-xl transition-all duration-200",
+    "bg-black/[0.03] border border-black/10",
+    "text-charcoal placeholder:text-charcoal/35",
+    "focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/40",
+    "[html[data-theme='dark']_&]:bg-white/[0.05] [html[data-theme='dark']_&]:border-white/10",
+    "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:placeholder:text-sand/35",
+    "[html[data-theme='dark']_&]:focus:ring-accent/30 [html[data-theme='dark']_&]:focus:border-accent/40"
   );
 
   const labelClasses = cn(
-    "block text-sm font-medium mb-2",
-    "text-charcoal [html[data-theme='dark']_&]:text-sand"
+    "block text-sm font-medium mb-1.5",
+    "text-charcoal/80 [html[data-theme='dark']_&]:text-sand/80"
   );
+
+  const isDisabled = status === "submitting";
 
   return (
     <PageLayout maxWidth="sm">
       {/* Header */}
       <motion.div
-        className="flex justify-between items-center mb-8"
+        className="flex justify-between items-center mb-6"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -109,14 +172,14 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
 
       {/* Title */}
       <motion.div
-        className="text-center mb-8"
+        className="mb-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
         <h1
           className={cn(
-            "text-3xl sm:text-4xl font-display font-bold mb-3",
+            "text-2xl sm:text-3xl font-display font-bold mb-1.5",
             "text-charcoal [html[data-theme='dark']_&]:text-sand"
           )}
         >
@@ -124,7 +187,8 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
         </h1>
         <p
           className={cn(
-            "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
+            "text-sm",
+            "text-charcoal-light [html[data-theme='dark']_&]:text-sand/55"
           )}
         >
           {translate("app.contact.subtitle")}
@@ -137,32 +201,46 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <GlassCard className="p-6 sm:p-8" hover={false}>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label htmlFor="name" className={labelClasses}>
-                {translate("app.contact.name")}
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className={inputClasses}
-                required
-              />
-            </div>
+        <GlassCard className="p-5 sm:p-7" hover={false}>
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="space-y-4"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="name" className={labelClasses}>
+                  {translate("app.contact.name")}
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder={intl.formatMessage({
+                    id: "app.contact.namePlaceholder",
+                  })}
+                  className={inputClasses}
+                  required
+                  disabled={isDisabled}
+                />
+              </div>
 
-            <div>
-              <label htmlFor="email" className={labelClasses}>
-                {translate("app.contact.email")}
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className={inputClasses}
-                required
-              />
+              <div>
+                <label htmlFor="email" className={labelClasses}>
+                  {translate("app.contact.email")}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder={intl.formatMessage({
+                    id: "app.contact.emailPlaceholder",
+                  })}
+                  className={inputClasses}
+                  required
+                  disabled={isDisabled}
+                />
+              </div>
             </div>
 
             <div>
@@ -172,27 +250,90 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
               <textarea
                 id="message"
                 name="message"
-                rows={5}
+                rows={4}
+                placeholder={intl.formatMessage({
+                  id: "app.contact.messagePlaceholder",
+                })}
                 className={cn(inputClasses, "resize-none")}
                 required
+                disabled={isDisabled}
               />
             </div>
 
-            <Button
+            <div ref={turnstileRef} className="flex justify-center" />
+
+            <motion.button
               type="submit"
-              size="md"
-              className="w-full"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <span className="animate-pulse">...</span>
-              ) : (
-                <>
-                  <FiSend className="w-4 h-4" />
-                  {translate("app.contact.submit")}
-                </>
+              disabled={isDisabled}
+              className={cn(
+                "w-full flex items-center justify-center gap-2",
+                "px-6 py-3.5 rounded-xl",
+                "text-sm font-semibold transition-all duration-200",
+                "focus:outline-none focus:ring-2 focus:ring-accent/50",
+                "disabled:opacity-60 disabled:cursor-not-allowed",
+                status === "success"
+                  ? "bg-emerald-500 text-white [html[data-theme='dark']_&]:bg-emerald-500"
+                  : status === "error"
+                    ? "bg-red-500 text-white [html[data-theme='dark']_&]:bg-red-500"
+                    : cn(
+                        "bg-charcoal text-sand shadow-md",
+                        "hover:bg-charcoal/90 hover:shadow-lg",
+                        "[html[data-theme='dark']_&]:bg-sand [html[data-theme='dark']_&]:text-charcoal",
+                        "[html[data-theme='dark']_&]:hover:bg-sand/90"
+                      )
               )}
-            </Button>
+              whileTap={
+                !isDisabled && status === "idle" ? { scale: 0.98 } : undefined
+              }
+            >
+              <AnimatePresence mode="wait">
+                {status === "submitting" ? (
+                  <motion.span
+                    key="sending"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    {translate("app.contact.sending")}
+                  </motion.span>
+                ) : status === "success" ? (
+                  <motion.span
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="flex items-center gap-2"
+                  >
+                    <FiCheck className="w-4 h-4" />
+                    {translate("app.contact.success.title")}
+                  </motion.span>
+                ) : status === "error" ? (
+                  <motion.span
+                    key="error"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="flex items-center gap-2"
+                  >
+                    <FiAlertCircle className="w-4 h-4" />
+                    {translate("app.contact.error.title")}
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="idle"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-2"
+                  >
+                    <FiSend className="w-4 h-4" />
+                    {translate("app.contact.submit")}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </form>
         </GlassCard>
       </motion.div>

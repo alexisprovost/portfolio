@@ -40,11 +40,16 @@ export default {
     "app.contact.name": "Name",
     "app.contact.email": "Email",
     "app.contact.message": "Message",
+    "app.contact.namePlaceholder": "Your name",
+    "app.contact.emailPlaceholder": "your@email.com",
+    "app.contact.messagePlaceholder": "What would you like to talk about?",
     "app.contact.submit": "Send Message",
+    "app.contact.sending": "Sending...",
     "app.contact.success.title": "Message sent!",
-    "app.contact.success.message": "Your message has been sent successfully",
+    "app.contact.success.message": "Your message has been sent successfully.",
     "app.contact.error.title": "Error",
-    "app.contact.error.message": "An error occurred. Please try again or email me directly.",
+    "app.contact.error.message": "An error occurred. Please try again.",
+    "app.contact.error.verification": "Please complete the verification.",
 
     // Uses Page
     "app.uses.title": "My Setup",

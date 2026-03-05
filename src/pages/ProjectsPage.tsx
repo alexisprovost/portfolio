@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { FiArrowLeft } from "react-icons/fi";
 import { useWebHaptics } from "web-haptics/react";
 import { PageLayout } from "@/components/layout";
@@ -40,18 +39,18 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
       const lang = locale.split("-")[0];
 
       try {
-        const response = await axios.get(`${API_URLS.projects}${lang}/projects`, {
-          headers: { "Content-Type": "application/json" },
-          timeout: 5000,
+        const response = await fetch(`${API_URLS.projects}${lang}/projects`, {
+          signal: AbortSignal.timeout(5000),
         });
-        setProjects(response.data);
+        if (!response.ok) throw new Error();
+        setProjects(await response.json());
       } catch {
         try {
-          const fallbackResponse = await axios.get(
-            `${API_URLS.fallback}${lang}/projects`,
-            { headers: { "Content-Type": "application/json" } }
+          const fallbackResponse = await fetch(
+            `${API_URLS.fallback}${lang}/projects`
           );
-          setProjects(fallbackResponse.data);
+          if (!fallbackResponse.ok) throw new Error();
+          setProjects(await fallbackResponse.json());
         } catch {
           setError(true);
         }
