@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSun, FiMoon } from "react-icons/fi";
+import { useWebHaptics } from "web-haptics/react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -9,11 +10,15 @@ interface ThemeToggleProps {
 
 export const ThemeToggle = ({ className }: ThemeToggleProps) => {
   const { theme, toggleTheme } = useTheme();
+  const haptic = useWebHaptics();
   const isDark = theme === "dark";
 
   return (
     <motion.button
-      onClick={toggleTheme}
+      onClick={() => {
+        haptic.trigger("light");
+        toggleTheme();
+      }}
       className={cn(
         "relative w-10 h-10 flex items-center justify-center overflow-hidden",
         "rounded-full",

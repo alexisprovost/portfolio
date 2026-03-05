@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import { FiArrowLeft, FiSend } from "react-icons/fi";
+import { useWebHaptics } from "web-haptics/react";
 import { PageLayout } from "@/components/layout";
 import { GlassCard, Button } from "@/components/ui";
 import { ThemeToggle, LanguageToggle } from "@/components/shared";
@@ -20,6 +21,7 @@ interface ContactPageProps {
 export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
   useDocumentTitle("Contact");
 
+  const haptic = useWebHaptics();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,6 +41,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
+      haptic.trigger("success");
       toast.success(
         locale.startsWith("fr") ? "Message envoyé!" : "Message sent!",
         {
@@ -50,6 +53,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
 
       form.reset();
     } catch {
+      haptic.trigger("error");
       toast.error(locale.startsWith("fr") ? "Erreur" : "Error", {
         description: locale.startsWith("fr")
           ? "Une erreur est survenue. Veuillez réessayer."

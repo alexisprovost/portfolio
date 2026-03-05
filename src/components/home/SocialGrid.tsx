@@ -1,4 +1,5 @@
 import { motion, Variants } from "framer-motion";
+import { useWebHaptics } from "web-haptics/react";
 import { SOCIAL_LINKS, type SocialLink } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +28,7 @@ interface SocialCardProps {
 }
 
 const SocialCard = ({ link }: SocialCardProps) => {
+  const haptic = useWebHaptics();
   const Icon = link.icon;
   const isInstagram = link.brandColor === "instagram";
   const isDarkColor = ["#000000", "#181717"].includes(link.brandColor);
@@ -38,6 +40,7 @@ const SocialCard = ({ link }: SocialCardProps) => {
       rel="noopener noreferrer"
       variants={itemVariants}
       whileTap={{ scale: 0.95 }}
+      onClick={() => haptic.trigger("light")}
       className={cn(
         "group flex flex-col items-center justify-center gap-1.5",
         "aspect-square rounded-xl px-1",

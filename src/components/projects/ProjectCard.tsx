@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { format, parseISO, isBefore } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
 import { FiExternalLink, FiGithub, FiYoutube, FiImage, FiChevronDown, FiArrowRight } from "react-icons/fi";
+import { useWebHaptics } from "web-haptics/react";
 import { GlassCard, Badge } from "@/components/ui";
 import translate from "@/i18n/translate";
 import { cn } from "@/lib/utils";
@@ -62,6 +63,7 @@ const getLinkProperties = (url: string) => {
 };
 
 export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
+  const haptic = useWebHaptics();
   const { img, name, date, technologies, description, url } = project;
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -183,7 +185,10 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
               {/* Show description toggle */}
               {description && (
                 <button
-                  onClick={() => setIsExpanded(!isExpanded)}
+                  onClick={() => {
+                    haptic.trigger("light");
+                    setIsExpanded(!isExpanded);
+                  }}
                   className={cn(
                     "flex items-center gap-1 text-xs font-medium",
                     "text-charcoal/50 active:opacity-70 transition-opacity",

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useWebHaptics } from "web-haptics/react";
 import { cn } from "@/lib/utils";
 import { LOCALES } from "@/i18n/locales";
 
@@ -13,6 +14,7 @@ export const LanguageToggle = ({
   onChange,
   className,
 }: LanguageToggleProps) => {
+  const haptic = useWebHaptics();
   const isEnglish = locale === LOCALES.ENGLISH;
 
   return (
@@ -34,7 +36,10 @@ export const LanguageToggle = ({
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
       />
       <button
-        onClick={() => onChange(LOCALES.ENGLISH)}
+        onClick={() => {
+          haptic.trigger("selection");
+          onChange(LOCALES.ENGLISH);
+        }}
         className={cn(
           "relative z-10 w-10 h-8 text-xs font-semibold rounded-full transition-colors",
           isEnglish
@@ -45,7 +50,10 @@ export const LanguageToggle = ({
         EN
       </button>
       <button
-        onClick={() => onChange(LOCALES.FRENCH)}
+        onClick={() => {
+          haptic.trigger("selection");
+          onChange(LOCALES.FRENCH);
+        }}
         className={cn(
           "relative z-10 w-10 h-8 text-xs font-semibold rounded-full transition-colors",
           !isEnglish

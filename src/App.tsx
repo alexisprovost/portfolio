@@ -32,6 +32,17 @@ const Fx = ({ active }: { active: boolean }) => {
   const scriptLoaded = useRef(false);
 
   useEffect(() => {
+    if (active) {
+      document.documentElement.style.backgroundColor = "#0a0a14";
+    } else {
+      document.documentElement.style.backgroundColor = "";
+    }
+    return () => {
+      document.documentElement.style.backgroundColor = "";
+    };
+  }, [active]);
+
+  useEffect(() => {
     if (!active || !embedRef.current || scriptLoaded.current) return;
     scriptLoaded.current = true;
 

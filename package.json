@@ -21,7 +21,8 @@
     "react-icons": "^5.5.0",
     "react-intl": "^8.1.1",
     "react-router-dom": "^7.13.0",
-    "sonner": "^2.0.7"
+    "sonner": "^2.0.7",
+    "web-haptics": "^0.0.6"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
