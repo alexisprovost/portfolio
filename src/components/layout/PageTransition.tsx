@@ -1,5 +1,4 @@
-import { motion, AnimatePresence, Variants } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { motion, Variants } from "framer-motion";
 
 interface PageTransitionProps {
   children: React.ReactNode;
@@ -29,21 +28,16 @@ const pageVariants: Variants = {
 };
 
 export const PageTransition = ({ children }: PageTransitionProps) => {
-  const location = useLocation();
-
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        variants={pageVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        className="min-h-screen"
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="min-h-screen"
+    >
+      {children}
+    </motion.div>
   );
 };
 

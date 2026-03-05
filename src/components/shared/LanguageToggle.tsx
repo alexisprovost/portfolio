@@ -44,7 +44,7 @@ export const LanguageToggle = ({
           "relative z-10 w-10 h-8 text-xs font-semibold rounded-full transition-colors",
           isEnglish
             ? "text-charcoal [html[data-theme='dark']_&]:text-sand"
-            : "text-charcoal/40 [html[data-theme='dark']_&]:text-sand/40"
+            : "text-charcoal/55 [html[data-theme='dark']_&]:text-sand/55"
         )}
       >
         EN
@@ -58,7 +58,7 @@ export const LanguageToggle = ({
           "relative z-10 w-10 h-8 text-xs font-semibold rounded-full transition-colors",
           !isEnglish
             ? "text-charcoal [html[data-theme='dark']_&]:text-sand"
-            : "text-charcoal/40 [html[data-theme='dark']_&]:text-sand/40"
+            : "text-charcoal/55 [html[data-theme='dark']_&]:text-sand/55"
         )}
       >
         FR

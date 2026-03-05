@@ -144,12 +144,17 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
       >
         {showImage ? (
           <>
-            <img
-              src={PROFILE.avatar}
-              alt={PROFILE.name}
-              className="w-full h-full object-cover"
-              onError={() => setImgError(true)}
-            />
+            <picture>
+              <source srcSet={PROFILE.avatar.replace(".jpg", ".avif")} type="image/avif" />
+              <source srcSet={PROFILE.avatar.replace(".jpg", ".webp")} type="image/webp" />
+              <img
+                src={PROFILE.avatar}
+                alt={PROFILE.name}
+                className="w-full h-full object-cover"
+                fetchPriority="high"
+                onError={() => setImgError(true)}
+              />
+            </picture>
             {altSrc && (
               <motion.div
                 className="absolute bottom-0 left-1/2 w-[75%] h-[50%] bg-contain bg-bottom bg-no-repeat"
