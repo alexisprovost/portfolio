@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useWebHaptics } from "web-haptics/react";
 import { cn } from "@/lib/utils";
 import translate from "@/i18n/translate";
 
 export const CookieBanner = () => {
+  const haptic = useWebHaptics();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -14,6 +16,7 @@ export const CookieBanner = () => {
   }, []);
 
   const dismiss = () => {
+    haptic.trigger("light");
     localStorage.setItem("cookie-notice", "1");
     setVisible(false);
   };

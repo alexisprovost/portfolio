@@ -72,7 +72,6 @@ export const FEATURED_LINKS: FeaturedLink[] = [
 export const API_URLS = {
   projects: "https://api.alexisprovost.com/",
   fallback: "https://ap.m19.workers.dev/",
-  contact: "https://api.alexisprovost.com/discord",
 };
 
 export const PROFILE = {

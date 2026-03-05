@@ -22,7 +22,7 @@ export const PageLayout = ({
   maxWidth = "md",
 }: PageLayoutProps) => {
   return (
-    <div
+    <main
       className={cn(
         "min-h-screen min-h-svh w-full px-4 py-8 sm:px-6 lg:px-8",
         "bg-sand transition-colors duration-300",
@@ -32,7 +32,7 @@ export const PageLayout = ({
       )}
     >
       <div className={cn("w-full", maxWidths[maxWidth])}>{children}</div>
-    </div>
+    </main>
   );
 };
 

@@ -14,7 +14,7 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
   useDocumentTitle("Portfolio");
 
   return (
-    <div
+    <main
       className={cn(
         "min-h-screen min-h-svh w-full",
         "flex flex-col",
@@ -52,7 +52,7 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
           <p
             className={cn(
               "text-[10px] tracking-wide",
-              "text-charcoal/40 [html[data-theme='dark']_&]:text-sand/40",
+              "text-charcoal/55 [html[data-theme='dark']_&]:text-sand/55",
               "flex items-center justify-center gap-1"
             )}
           >
@@ -63,7 +63,7 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "hover:text-charcoal/60 [html[data-theme='dark']_&]:hover:text-sand/60",
+                "hover:text-charcoal/70 [html[data-theme='dark']_&]:hover:text-sand/70",
                 "transition-colors"
               )}
             >
@@ -72,7 +72,7 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
           </p>
         </motion.footer>
       </div>
-    </div>
+    </main>
   );
 };
 

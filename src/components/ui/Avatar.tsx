@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
+import { useWebHaptics } from "web-haptics/react";
 import { cn } from "@/lib/utils";
 import { PROFILE } from "@/lib/constants";
 
@@ -27,6 +28,7 @@ const subscribe = (cb: () => void) => {
 export const Avatar = ({ size = "lg", className }: AvatarProps) => {
   const [imgError, setImgError] = useState(false);
   const fxActive = useSyncExternalStore(subscribe, getFxOn, () => false);
+  const haptic = useWebHaptics();
   const c = useRef(0);
   const t = useRef(0);
 
@@ -36,6 +38,16 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
     const duration = 3000;
     const end = Date.now() + duration;
     const colors = ["#FF6B6B", "#4ECDC4", "#FFE66D", "#95E1D3", "#F38181"];
+
+    // Haptic burst
+    const hapticEnd = Date.now() + 600;
+    const buzz = () => {
+      haptic.trigger("heavy");
+      if (Date.now() < hapticEnd) {
+        setTimeout(buzz, 80);
+      }
+    };
+    buzz();
 
     const frame = () => {
       confetti({
@@ -64,7 +76,7 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
       colors,
     });
     frame();
-  }, []);
+  }, [haptic]);
 
   const handleClick = useCallback(() => {
     const now = Date.now();
@@ -74,11 +86,16 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
     t.current = now;
     c.current += 1;
 
-    if (c.current >= 10) {
+    const n = c.current;
+    if (n < 4) haptic.trigger("light");
+    else if (n < 7) haptic.trigger("medium");
+    else if (n < 10) haptic.trigger("heavy");
+
+    if (n >= 10) {
       trigger();
       c.current = 0;
     }
-  }, [trigger]);
+  }, [trigger, haptic]);
 
   const initials = PROFILE.name
     .split(" ")
@@ -127,12 +144,17 @@ export const Avatar = ({ size = "lg", className }: AvatarProps) => {
       >
         {showImage ? (
           <>
-            <img
-              src={PROFILE.avatar}
-              alt={PROFILE.name}
-              className="w-full h-full object-cover"
-              onError={() => setImgError(true)}
-            />
+            <picture>
+              <source srcSet={PROFILE.avatar.replace(".jpg", ".avif")} type="image/avif" />
+              <source srcSet={PROFILE.avatar.replace(".jpg", ".webp")} type="image/webp" />
+              <img
+                src={PROFILE.avatar}
+                alt={PROFILE.name}
+                className="w-full h-full object-cover"
+                fetchPriority="high"
+                onError={() => setImgError(true)}
+              />
+            </picture>
             {altSrc && (
               <motion.div
                 className="absolute bottom-0 left-1/2 w-[75%] h-[50%] bg-contain bg-bottom bg-no-repeat"

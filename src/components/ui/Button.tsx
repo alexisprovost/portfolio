@@ -1,5 +1,6 @@
 import { motion, HTMLMotionProps } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useWebHaptics } from "web-haptics/react";
 import { cn } from "@/lib/utils";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -68,6 +69,7 @@ export const Button = ({
   as = "button",
   ...props
 }: ButtonProps) => {
+  const haptic = useWebHaptics();
   const baseClasses = cn(
     "inline-flex items-center justify-center gap-2",
     "font-medium transition-all duration-300",
@@ -111,6 +113,10 @@ export const Button = ({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       {...buttonProps}
+      onClick={(e) => {
+        haptic.trigger(variant === "primary" ? "medium" : "light");
+        buttonProps.onClick?.(e);
+      }}
     >
       {content}
     </motion.button>
