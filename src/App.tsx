@@ -34,11 +34,14 @@ const Fx = ({ active }: { active: boolean }) => {
   useEffect(() => {
     if (active) {
       document.documentElement.style.backgroundColor = "#0a0a14";
+      document.body.style.backgroundColor = "#0a0a14";
     } else {
       document.documentElement.style.backgroundColor = "";
+      document.body.style.backgroundColor = "";
     }
     return () => {
       document.documentElement.style.backgroundColor = "";
+      document.body.style.backgroundColor = "";
     };
   }, [active]);
 
