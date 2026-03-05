@@ -7,27 +7,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const { name, email, message, token } = req.body;
 
-  if (!name || !email || !message || !token) {
+  if (!name || !email || !message) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  // Verify Cloudflare Turnstile token
-  const turnstileRes = await fetch(
-    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        secret: process.env.TURNSTILE_SECRET_KEY!,
-        response: token,
-      }),
+  // Verify Cloudflare Turnstile token (skip if no secret configured)
+  if (token && process.env.TURNSTILE_SECRET_KEY) {
+    const turnstileRes = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: process.env.TURNSTILE_SECRET_KEY,
+          response: token,
+        }),
+      }
+    );
+
+    const turnstileData = await turnstileRes.json();
+
+    if (!turnstileData.success) {
+      return res.status(403).json({ error: "Verification failed" });
     }
-  );
-
-  const turnstileData = await turnstileRes.json();
-
-  if (!turnstileData.success) {
-    return res.status(403).json({ error: "Verification failed" });
+  } else if (process.env.TURNSTILE_SECRET_KEY) {
+    // Secret is configured but no token provided — reject in production
+    return res.status(400).json({ error: "Verification token required" });
   }
 
   // Send to Discord webhook

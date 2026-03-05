@@ -29,6 +29,8 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
   const turnstileWidgetId = useRef<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
+  const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+
   const renderTurnstile = useCallback(() => {
     const w = window as Window & { turnstile?: any };
     if (!w.turnstile || !turnstileRef.current) return;
@@ -36,16 +38,18 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
       w.turnstile.remove(turnstileWidgetId.current);
     }
     turnstileWidgetId.current = w.turnstile.render(turnstileRef.current, {
-      sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY,
+      sitekey: siteKey,
       theme:
         document.documentElement.getAttribute("data-theme") === "dark"
           ? "dark"
           : "light",
       size: "flexible",
     });
-  }, []);
+  }, [siteKey]);
 
   useEffect(() => {
+    if (!siteKey) return;
+
     const w = window as Window & { turnstile?: any };
     if (w.turnstile) {
       renderTurnstile();
@@ -62,15 +66,15 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
     return () => {
       (window as any).onTurnstileLoad = undefined;
     };
-  }, [renderTurnstile]);
+  }, [siteKey, renderTurnstile]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const w = window as Window & { turnstile?: any };
-    const token = w.turnstile?.getResponse(turnstileWidgetId.current);
+    const token = w.turnstile?.getResponse(turnstileWidgetId.current) || "";
 
-    if (!token) {
+    if (!token && import.meta.env.PROD) {
       haptic.trigger("warning");
       toast.error(intl.formatMessage({ id: "app.contact.error.title" }), {
         description: intl.formatMessage({
@@ -260,7 +264,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
               />
             </div>
 
-            <div ref={turnstileRef} className="flex justify-center" />
+            {siteKey && <div ref={turnstileRef} className="flex justify-center" />}
 
             <motion.button
               type="submit"
