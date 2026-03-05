@@ -89,8 +89,10 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
       >
         <Link
           to="/"
+          onClick={() => haptic.trigger("medium")}
           className={cn(
             "flex items-center gap-2 text-sm font-medium transition-colors",
+            "-ml-2 px-2 py-2 rounded-lg",
             "text-charcoal hover:text-coral",
             "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:hover:text-warm-peach"
           )}

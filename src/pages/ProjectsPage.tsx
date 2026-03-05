@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FiArrowLeft } from "react-icons/fi";
+import { useWebHaptics } from "web-haptics/react";
 import { PageLayout } from "@/components/layout";
 import { ProjectCard } from "@/components/projects";
 import { LoadingSpinner, ThemeToggle, LanguageToggle } from "@/components/shared";
@@ -18,6 +19,7 @@ interface ProjectsPageProps {
 
 export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   useDocumentTitle("Projects");
+  const haptic = useWebHaptics();
 
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -70,9 +72,12 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
       {/* Fixed Header */}
       <motion.div
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 px-5 sm:px-6 py-4 transition-colors duration-200",
+          "fixed top-0 left-0 right-0 z-50 px-5 sm:px-6 pb-4 transition-all duration-200",
+          "pt-[calc(env(safe-area-inset-top)+1rem)]",
           "border-b border-transparent",
-          scrolled && "backdrop-blur-md bg-sand/80 border-sand-dark/30 [html[data-theme='dark']_&]:bg-warm-black/80 [html[data-theme='dark']_&]:border-charcoal-light/20"
+          scrolled
+            ? "backdrop-blur-md bg-sand/80 border-sand-dark/30 [html[data-theme='dark']_&]:bg-warm-black/80 [html[data-theme='dark']_&]:border-charcoal-light/20"
+            : "bg-transparent"
         )}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -80,8 +85,10 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
         <div className="flex justify-between items-center max-w-4xl mx-auto">
           <Link
             to="/"
+            onClick={() => haptic.trigger("medium")}
             className={cn(
               "flex items-center gap-2 text-sm font-medium transition-colors",
+              "-ml-2 px-2 py-2 rounded-lg",
               "text-charcoal hover:text-coral",
               "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:hover:text-warm-peach"
             )}
