@@ -6,7 +6,7 @@ import { useWebHaptics } from "web-haptics/react";
 import { PageLayout } from "@/components/layout";
 import { ProjectCard } from "@/components/projects";
 import { LoadingSpinner, ThemeToggle, LanguageToggle } from "@/components/shared";
-import { API_URLS } from "@/lib/constants";
+import { getProjectsCache } from "@/lib/projectsCache";
 import translate from "@/i18n/translate";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import { cn } from "@/lib/utils";
@@ -32,34 +32,29 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   }, []);
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const loadProjects = async () => {
       setError(false);
       setLoading(true);
 
-      const lang = locale.split("-")[0];
+      const cache = getProjectsCache(locale);
+
+      if (cache.data) {
+        setProjects(cache.data);
+        setLoading(false);
+        return;
+      }
 
       try {
-        const response = await fetch(`${API_URLS.projects}${lang}/projects`, {
-          signal: AbortSignal.timeout(5000),
-        });
-        if (!response.ok) throw new Error();
-        setProjects(await response.json());
+        const data = await cache.fetch();
+        setProjects(data);
       } catch {
-        try {
-          const fallbackResponse = await fetch(
-            `${API_URLS.fallback}${lang}/projects`
-          );
-          if (!fallbackResponse.ok) throw new Error();
-          setProjects(await fallbackResponse.json());
-        } catch {
-          setError(true);
-        }
+        setError(true);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProjects();
+    loadProjects();
   }, [locale]);
 
   useEffect(() => {

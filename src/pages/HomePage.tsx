@@ -39,7 +39,7 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
         <div className="flex-1 flex flex-col justify-center py-4 sm:py-8">
           <ProfileSection />
           <SocialGrid />
-          <FeaturedLinks />
+          <FeaturedLinks locale={locale} />
         </div>
 
         {/* Footer */}
