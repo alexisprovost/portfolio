@@ -147,7 +147,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
   const isDisabled = status === "submitting";
 
   return (
-    <PageLayout maxWidth="sm">
+    <PageLayout maxWidth="md">
       {/* Header */}
       <motion.div
         className="flex justify-between items-center mb-6"
@@ -254,7 +254,7 @@ export const ContactPage = ({ locale, onLocaleChange }: ContactPageProps) => {
               <textarea
                 id="message"
                 name="message"
-                rows={4}
+                rows={6}
                 placeholder={intl.formatMessage({
                   id: "app.contact.messagePlaceholder",
                 })}
