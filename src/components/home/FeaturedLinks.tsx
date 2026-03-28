@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FiChevronRight, FiFolder, FiMail } from "react-icons/fi";
 import { useWebHaptics } from "web-haptics/react";
 import { FEATURED_LINKS } from "@/lib/constants";
+import { prefetchProjects } from "@/lib/projectsCache";
 import translate from "@/i18n/translate";
 import { cn } from "@/lib/utils";
 
@@ -31,8 +32,14 @@ const itemVariants: Variants = {
   },
 };
 
-export const FeaturedLinks = () => {
+export const FeaturedLinks = ({ locale }: { locale: string }) => {
   const haptic = useWebHaptics();
+
+  const handlePointerEnter = (linkId: string) => {
+    if (linkId === "projects") {
+      prefetchProjects(locale);
+    }
+  };
 
   return (
     <motion.div
@@ -43,7 +50,12 @@ export const FeaturedLinks = () => {
     >
       {FEATURED_LINKS.map((link) => (
         <motion.div key={link.id} variants={itemVariants}>
-          <Link to={link.to} className="block group" onClick={() => haptic.trigger("medium")}>
+          <Link
+            to={link.to}
+            className="block group"
+            onClick={() => haptic.trigger("medium")}
+            onPointerEnter={() => handlePointerEnter(link.id)}
+          >
             <div
               className={cn(
                 "flex items-center justify-between",
