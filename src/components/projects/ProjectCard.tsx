@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { format, parseISO, isBefore } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
+import { marked } from "marked";
 import { FiExternalLink, FiGithub, FiYoutube, FiImage, FiChevronDown, FiArrowRight } from "react-icons/fi";
 import { useWebHaptics } from "web-haptics/react";
 import { GlassCard, Badge } from "@/components/ui";
@@ -76,6 +77,11 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
   const videoUrl = isVimeo
     ? `${img}?autoplay=1&loop=1&autopause=0&muted=1&background=1`
     : null;
+
+  const descriptionHtml = useMemo(
+    () => (description ? marked.parse(description, { async: false }) as string : ""),
+    [description]
+  );
 
   const linkProps = url ? getLinkProperties(url) : null;
   const LinkIcon = linkProps?.icon;
@@ -222,11 +228,15 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
                 className={cn(
                   "px-5 pb-5 pt-3 text-sm leading-relaxed",
                   "border-t border-sand-dark/20 [html[data-theme='dark']_&]:border-charcoal-light/20",
-                  "text-charcoal/80 [html[data-theme='dark']_&]:text-sand/70"
+                  "text-charcoal/80 [html[data-theme='dark']_&]:text-sand/70",
+                  "prose prose-sm max-w-none",
+                  "prose-headings:font-display prose-headings:text-charcoal [html[data-theme='dark']_&]:prose-headings:text-sand",
+                  "prose-a:text-accent [html[data-theme='dark']_&]:prose-a:text-warm-peach",
+                  "prose-strong:text-charcoal [html[data-theme='dark']_&]:prose-strong:text-sand",
+                  "prose-code:text-charcoal/90 [html[data-theme='dark']_&]:prose-code:text-sand/90"
                 )}
-              >
-                {description}
-              </div>
+                dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+              />
             </motion.div>
           )}
         </AnimatePresence>

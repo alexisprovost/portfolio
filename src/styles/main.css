@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./theme.css";
+@plugin "@tailwindcss/typography";
 
 @import "@fontsource/krona-one";
 @import "@fontsource/inter/400.css";
