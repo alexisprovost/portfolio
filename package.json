@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
-    "@fontsource/krona-one": "^5.2.8",
+    "@fontsource/poppins": "^5.2.7",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

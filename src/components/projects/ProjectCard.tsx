@@ -235,14 +235,19 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
             >
               <div
                 className={cn(
-                  "px-5 pb-5 pt-3 text-sm leading-relaxed",
+                  "px-6 pb-6 pt-6 text-sm leading-relaxed",
                   "border-t border-sand-dark/20 [html[data-theme='dark']_&]:border-charcoal-light/20",
                   "text-charcoal/80 [html[data-theme='dark']_&]:text-sand/70",
                   "prose prose-sm max-w-none",
                   "prose-headings:font-display prose-headings:text-charcoal [html[data-theme='dark']_&]:prose-headings:text-sand",
+                  "prose-headings:mt-6 prose-headings:mb-3 [&>*:first-child]:mt-0",
+                  "prose-p:my-2",
+                  "prose-ul:my-2 prose-li:my-1",
+                  "prose-hr:my-4",
                   "prose-a:text-accent [html[data-theme='dark']_&]:prose-a:text-warm-peach",
                   "prose-strong:text-charcoal [html[data-theme='dark']_&]:prose-strong:text-sand",
-                  "prose-code:text-charcoal/90 [html[data-theme='dark']_&]:prose-code:text-sand/90"
+                  "prose-code:text-charcoal/90 [html[data-theme='dark']_&]:prose-code:text-sand/90",
+                  "prose-code:text-xs prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:bg-charcoal/5 [html[data-theme='dark']_&]:prose-code:bg-sand/10"
                 )}
                 dangerouslySetInnerHTML={{ __html: descriptionHtml }}
               />

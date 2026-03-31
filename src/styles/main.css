@@ -2,10 +2,12 @@
 @import "./theme.css";
 @plugin "@tailwindcss/typography";
 
-@import "@fontsource/krona-one";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
 
 @layer base {
   html {
@@ -30,7 +32,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Krona One", sans-serif;
+    font-family: "Poppins", sans-serif;
     letter-spacing: -0.02em;
   }
 

@@ -34,7 +34,7 @@
   --color-warm-peach: var(--color-accent-light);
 
   /* Typography */
-  --font-display: "Krona One", sans-serif;
+  --font-display: "Poppins", sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
 
   /* Fluid font sizes */
