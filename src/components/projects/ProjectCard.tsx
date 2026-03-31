@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { format, parseISO, isBefore } from "date-fns";
+import { format, parseISO, isBefore, isToday, isFuture } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
 import { marked } from "marked";
 import { FiExternalLink, FiGithub, FiYoutube, FiImage, FiChevronDown, FiArrowRight } from "react-icons/fi";
@@ -19,6 +19,7 @@ interface Project {
   img?: string;
   name: string;
   date: string;
+  date_end?: string | null;
   technologies: Technology[];
   description: string;
   url?: string;
@@ -65,13 +66,19 @@ const getLinkProperties = (url: string) => {
 
 export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
   const haptic = useWebHaptics();
-  const { img, name, date, technologies, description, url } = project;
+  const { img, name, date, date_end, technologies, description, url } = project;
   const [isExpanded, setIsExpanded] = useState(false);
 
   const dateLocale = getDateLocale(locale);
   const parsedDate = parseISO(date);
   const isReleased = isBefore(parsedDate, new Date());
-  const formattedDate = format(parsedDate, "MMMM yyyy", { locale: dateLocale });
+  const formattedDate = useMemo(() => {
+    const fmt = (d: string) => format(parseISO(d), "MMM yyyy", { locale: dateLocale });
+    if (!date_end) return format(parsedDate, "MMMM yyyy", { locale: dateLocale });
+    const endDate = parseISO(date_end);
+    const isPresent = isToday(endDate) || isFuture(endDate);
+    return fmt(date) + " \u2013 " + (isPresent ? translate("app.project.present") : fmt(date_end));
+  }, [date, date_end, parsedDate, dateLocale]);
 
   const isVimeo = img && /vimeo\.com/.test(img);
   const videoUrl = isVimeo

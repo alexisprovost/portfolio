@@ -29,6 +29,7 @@ export default {
     "app.project.viewProjectGithub": "View on GitHub",
     "app.project.viewProjectImage": "View a screenshot",
     "app.project.projectNotReleased": "This project is releasing on {date}",
+    "app.project.present": "Present",
     "app.project.showMore": "Show More",
     "app.project.showLess": "Show Less",
     "app.project.showDescription": "Show Description",
