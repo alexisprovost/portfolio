@@ -81,8 +81,8 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
             to="/"
             onClick={() => haptic.trigger("medium")}
             className={cn(
-              "flex items-center gap-2 text-sm font-medium transition-colors",
-              "-ml-2 px-2 py-2 rounded-lg",
+              "inline-flex items-center gap-2 text-sm font-medium transition-colors",
+              "-ml-3 px-3 py-3 rounded-lg min-h-[44px] min-w-[44px]",
               "text-charcoal hover:text-coral",
               "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:hover:text-warm-peach"
             )}
@@ -99,8 +99,8 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
       </motion.div>
 
       <PageLayout maxWidth="lg">
-        {/* Spacer for fixed header */}
-        <div className="h-14" />
+        {/* Spacer for fixed header (matches header pt + content + pb) */}
+        <div className="h-[calc(env(safe-area-inset-top)+3rem)]" />
 
       {/* Title */}
       <motion.div

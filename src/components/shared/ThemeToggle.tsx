@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { FiSun, FiMoon, FiMonitor } from "react-icons/fi";
+import { FiSun, FiMoon } from "react-icons/fi";
+import { BsCircleHalf } from "react-icons/bs";
 import { useWebHaptics } from "web-haptics/react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
@@ -18,7 +19,7 @@ export const ThemeToggle = ({ className }: ThemeToggleProps) => {
   const { mode, cycleTheme } = useTheme();
   const haptic = useWebHaptics();
 
-  const Icon = mode === "auto" ? FiMonitor : mode === "light" ? FiSun : FiMoon;
+  const Icon = mode === "auto" ? BsCircleHalf : mode === "light" ? FiSun : FiMoon;
 
   return (
     <motion.button

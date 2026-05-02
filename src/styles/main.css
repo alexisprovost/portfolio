@@ -28,7 +28,7 @@
     transition: background-color 0.2s ease, color 0.2s ease;
     overflow-x: hidden;
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
   }
 
   :root[data-theme="dark"] body {
@@ -43,7 +43,7 @@
   #root {
     overflow-x: hidden;
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
   }

@@ -37,7 +37,7 @@ export default {
 
     // Contact
     "app.contact.title": "Get In Touch",
-    "app.contact.subtitle": "Send me a message and I'll receive it on Discord",
+    "app.contact.subtitle": "Send me a message and I'll get back to you soon",
     "app.contact.name": "Name",
     "app.contact.email": "Email",
     "app.contact.message": "Message",
