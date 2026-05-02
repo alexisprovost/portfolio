@@ -32,6 +32,8 @@ export const useTheme = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", resolvedTheme);
+    const meta = document.getElementById("theme-color");
+    if (meta) meta.setAttribute("content", resolvedTheme === "dark" ? "#09090B" : "#FAFAFA");
     if (mode === "auto") {
       localStorage.removeItem(STORAGE_KEY);
     } else {

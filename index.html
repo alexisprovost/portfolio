@@ -8,8 +8,7 @@
         <meta name="author" content="Alexis Provost">
         <meta name="uptime" content="A Piece of Cake" />
         <meta name="color-scheme" content="light dark">
-        <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
-        <meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)">
+        <meta name="theme-color" id="theme-color" content="#FAFAFA">
         <meta name="darkreader-lock">
 
         <!-- The Open Graph protocol -->
@@ -43,20 +42,32 @@
 		<script>
 			(function () {
 				try {
-					var stored = localStorage.getItem("theme");
-					var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+					var stored = null;
+					try { stored = localStorage.getItem("theme"); } catch (e) {}
+					var theme = stored;
+					if (theme !== "light" && theme !== "dark") {
+						try {
+							theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+						} catch (e) { theme = "light"; }
+					}
 					document.documentElement.setAttribute("data-theme", theme);
+					var meta = document.getElementById("theme-color");
+					if (meta) meta.setAttribute("content", theme === "dark" ? "#09090B" : "#FAFAFA");
 				} catch (e) {}
 			})();
 		</script>
 		<style>
-			html { background-color: #FAFAFA; }
-			html[data-theme="dark"] { background-color: #09090B; }
+			html { background-color: #FAFAFA; color-scheme: light; }
+			html[data-theme="dark"] { background-color: #09090B; color-scheme: dark; }
 			body { background-color: #FAFAFA; margin: 0; }
 			html[data-theme="dark"] body { background-color: #09090B; }
+			/* Top sampler bar: iOS 26 Safari samples toolbar color from fixed/sticky elements near the top before falling back to body */
+			#theme-sampler { position: fixed; top: 0; left: 0; right: 0; height: 1px; z-index: -1; pointer-events: none; background-color: #FAFAFA; }
+			html[data-theme="dark"] #theme-sampler { background-color: #09090B; }
 		</style>
 	</head>
 	<body>
+		<div id="theme-sampler"></div>
 		<div id="root"></div>
 		<script type="module" src="/src/main.tsx"></script>
 	</body>
