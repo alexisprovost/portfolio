@@ -99,8 +99,8 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
       </motion.div>
 
       <PageLayout maxWidth="lg">
-        {/* Spacer for fixed header (matches header pt + content + pb) */}
-        <div className="h-[calc(env(safe-area-inset-top)+3rem)]" />
+        {/* Spacer for fixed header */}
+        <div className="h-14" />
 
       {/* Title */}
       <motion.div
