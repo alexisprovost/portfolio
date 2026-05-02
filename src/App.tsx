@@ -139,18 +139,6 @@ const App = () => {
     localStorage.setItem("locale", locale);
   }, [locale]);
 
-  // Initialize theme on mount
-  useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored) {
-      document.documentElement.setAttribute("data-theme", stored);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-  }, []);
-
   useEffect(() => {
     const w = window as Window & { fx?: () => void; fxOn?: boolean };
     w.fx = fxGo;
