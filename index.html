@@ -39,6 +39,22 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="/src/assets/favicon/apple-touch-icon.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/src/assets/favicon/favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/src/assets/favicon/favicon-16x16.png" />
+
+		<script>
+			(function () {
+				try {
+					var stored = localStorage.getItem("theme");
+					var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+					document.documentElement.setAttribute("data-theme", theme);
+				} catch (e) {}
+			})();
+		</script>
+		<style>
+			html { background-color: #FAFAFA; }
+			html[data-theme="dark"] { background-color: #09090B; }
+			body { background-color: #FAFAFA; margin: 0; }
+			html[data-theme="dark"] body { background-color: #09090B; }
+		</style>
 	</head>
 	<body>
 		<div id="root"></div>
