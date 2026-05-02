@@ -16,6 +16,11 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-sand);
+  }
+
+  :root[data-theme="dark"] {
+    background-color: var(--color-warm-black);
   }
 
   body {
@@ -23,8 +28,7 @@
     transition: background-color 0.2s ease, color 0.2s ease;
     overflow-x: hidden;
     min-height: 100vh;
-    min-height: 100svh;
-    min-height: -webkit-fill-available;
+    min-height: 100dvh;
   }
 
   :root[data-theme="dark"] body {
@@ -39,8 +43,7 @@
   #root {
     overflow-x: hidden;
     min-height: 100vh;
-    min-height: 100svh;
-    min-height: -webkit-fill-available;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
   }

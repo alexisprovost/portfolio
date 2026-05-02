@@ -16,7 +16,7 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
   return (
     <main
       className={cn(
-        "min-h-screen min-h-svh w-full",
+        "min-h-screen min-h-dvh w-full",
         "flex flex-col",
         "px-5 sm:px-6 py-6 sm:py-8",
         "bg-sand [html[data-theme='dark']_&]:bg-warm-black"
