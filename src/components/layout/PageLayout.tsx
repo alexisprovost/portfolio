@@ -24,7 +24,7 @@ export const PageLayout = ({
   return (
     <main
       className={cn(
-        "min-h-screen min-h-svh w-full px-4 py-8 sm:px-6 lg:px-8",
+        "min-h-screen min-h-dvh w-full px-4 py-8 sm:px-6 lg:px-8",
         "bg-sand transition-colors duration-300",
         "[html[data-theme='dark']_&]:bg-warm-black",
         centered && "flex flex-col items-center",
