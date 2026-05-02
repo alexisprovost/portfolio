@@ -61,8 +61,8 @@
 			html[data-theme="dark"] { background-color: #09090B; color-scheme: dark; }
 			body { background-color: #FAFAFA; margin: 0; }
 			html[data-theme="dark"] body { background-color: #09090B; }
-			/* Top sampler bar: iOS 26 Safari samples toolbar color from fixed/sticky elements near the top before falling back to body */
-			#theme-sampler { position: fixed; top: 0; left: 0; right: 0; height: 1px; z-index: -1; pointer-events: none; background-color: #FAFAFA; }
+			/* Top sampler bar: iOS 26 Safari samples toolbar color from fixed/sticky elements near the top before falling back to body. Invisible because it matches the body color, but must NOT be behind a higher z-index or sampling skips it. */
+			#theme-sampler { position: fixed; top: 0; left: 0; right: 0; height: 2px; pointer-events: none; background-color: #FAFAFA; }
 			html[data-theme="dark"] #theme-sampler { background-color: #09090B; }
 		</style>
 	</head>
