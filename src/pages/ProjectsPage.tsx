@@ -160,43 +160,62 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
           </h1>
         </motion.div>
 
-        {/* Filter chips */}
-        {!loading && !error && allTags.length > 0 && (
-          <motion.div
-            className="flex flex-wrap items-center gap-1.5 justify-center mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            {activeTags.size > 0 && (
-              <button
-                onClick={clearTags}
-                className={cn(
-                  "text-xs font-medium px-2.5 py-1 rounded-full",
-                  "text-charcoal-light hover:text-charcoal transition-colors",
-                  "[html[data-theme='dark']_&]:text-sand/60 [html[data-theme='dark']_&]:hover:text-sand"
-                )}
-              >
-                {translate("app.projects.clearFilters")}
-              </button>
-            )}
-            {allTags.map((tag) => {
-              const active = activeTags.has(tag);
-              return (
+        {/* Filter chips (skeleton placeholders during load to avoid layout shift) */}
+        <div className="flex flex-wrap items-center gap-1.5 justify-center mb-8 min-h-[28px]">
+          {loading ? (
+            <>
+              {[14, 20, 16, 24, 18, 22].map((w, i) => (
+                <div
+                  key={i}
+                  className={cn(
+                    "h-[22px] rounded-full",
+                    "bg-charcoal/5 [html[data-theme='dark']_&]:bg-sand/5",
+                    "relative overflow-hidden",
+                    "after:absolute after:inset-0 after:-translate-x-full after:animate-[shimmer_1.6s_infinite]",
+                    "after:bg-gradient-to-r after:from-transparent after:via-charcoal/5 after:to-transparent",
+                    "[html[data-theme='dark']_&]:after:via-sand/10"
+                  )}
+                  style={{ width: `${w * 4}px` }}
+                />
+              ))}
+            </>
+          ) : !error && allTags.length > 0 ? (
+            <motion.div
+              className="flex flex-wrap items-center gap-1.5 justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              {activeTags.size > 0 && (
                 <button
-                  key={tag}
-                  onClick={() => toggleTag(tag)}
-                  className="transition-transform active:scale-95"
-                  aria-pressed={active}
+                  onClick={clearTags}
+                  className={cn(
+                    "text-xs font-medium px-2.5 py-1 rounded-full",
+                    "text-charcoal-light hover:text-charcoal transition-colors",
+                    "[html[data-theme='dark']_&]:text-sand/60 [html[data-theme='dark']_&]:hover:text-sand"
+                  )}
                 >
-                  <Badge variant={active ? "accent" : "default"} size="sm">
-                    {tag}
-                  </Badge>
+                  {translate("app.projects.clearFilters")}
                 </button>
-              );
-            })}
-          </motion.div>
-        )}
+              )}
+              {allTags.map((tag) => {
+                const active = activeTags.has(tag);
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className="transition-transform active:scale-95"
+                    aria-pressed={active}
+                  >
+                    <Badge variant={active ? "accent" : "default"} size="sm">
+                      {tag}
+                    </Badge>
+                  </button>
+                );
+              })}
+            </motion.div>
+          ) : null}
+        </div>
 
         {/* Content */}
         {loading ? (
