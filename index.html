@@ -61,8 +61,8 @@
 			html[data-theme="dark"] { background-color: #09090B; color-scheme: dark; }
 			body { background-color: #FAFAFA; margin: 0; }
 			html[data-theme="dark"] body { background-color: #09090B; }
-			/* iOS 26 toolbar tinting: Safari samples a fixed element near the top edge IF it is >=3px tall, >=80% wide, and within 4px of the top. */
-			#theme-sampler { position: fixed; top: 0; left: 0; right: 0; height: 6px; pointer-events: none; background-color: #FAFAFA; }
+			/* iOS 26 toolbar tinting: Safari samples a fixed element near the top edge IF it is >=3px tall, >=80% wide, and within 4px of the top. High z-index so it wins over Toaster/page headers. */
+			#theme-sampler { position: fixed; top: 0; left: 0; right: 0; height: 6px; z-index: 9999; pointer-events: none; background-color: #FAFAFA; }
 			html[data-theme="dark"] #theme-sampler { background-color: #09090B; }
 		</style>
 	</head>
