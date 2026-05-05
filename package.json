@@ -12,6 +12,7 @@
     "@fontsource/inter": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

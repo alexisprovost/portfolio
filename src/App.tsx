@@ -1,13 +1,24 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import "@/styles/main.css";
 
-import { HomePage, ProjectsPage, ContactPage, NotFoundPage } from "@/pages";
-import { CookieBanner } from "@/components/shared";
+import { HomePage } from "@/pages";
+import { CookieBanner, LoadingSpinner } from "@/components/shared";
+
+const ProjectsPage = lazy(() => import("@/pages/ProjectsPage").then((m) => ({ default: m.ProjectsPage })));
+const ContactPage = lazy(() => import("@/pages/ContactPage").then((m) => ({ default: m.ContactPage })));
+const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
+
+const RouteFallback = () => (
+  <div className="min-h-svh flex items-center justify-center bg-sand [html[data-theme='dark']_&]:bg-warm-black">
+    <LoadingSpinner size="lg" />
+  </div>
+);
 
 import { I18nProvider } from "@/i18n";
 import getBrowserLocale from "@/hooks/getBrowserLocale";
@@ -163,27 +174,30 @@ const App = () => {
         }}
       />
       <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={<HomePage locale={locale} onLocaleChange={setLocale} />}
-          />
-          <Route
-            path="/projects"
-            element={<ProjectsPage locale={locale} onLocaleChange={setLocale} />}
-          />
-          <Route
-            path="/contact"
-            element={<ContactPage locale={locale} onLocaleChange={setLocale} />}
-          />
-          <Route
-            path="*"
-            element={<NotFoundPage locale={locale} onLocaleChange={setLocale} />}
-          />
-        </Routes>
+        <Suspense fallback={<RouteFallback />}>
+          <Routes location={location} key={location.pathname}>
+            <Route
+              path="/"
+              element={<HomePage locale={locale} onLocaleChange={setLocale} />}
+            />
+            <Route
+              path="/projects"
+              element={<ProjectsPage locale={locale} onLocaleChange={setLocale} />}
+            />
+            <Route
+              path="/contact"
+              element={<ContactPage locale={locale} onLocaleChange={setLocale} />}
+            />
+            <Route
+              path="*"
+              element={<NotFoundPage locale={locale} onLocaleChange={setLocale} />}
+            />
+          </Routes>
+        </Suspense>
       </AnimatePresence>
       <CookieBanner />
       <Analytics />
+      <SpeedInsights />
     </I18nProvider>
   );
 };
