@@ -34,8 +34,9 @@ export default {
     "app.project.showLess": "Show Less",
     "app.project.showDescription": "Show Description",
     "app.project.hideDescription": "Hide Description",
-    "app.projects.clearFilters": "Clear",
-    "app.projects.noResults": "No projects match the selected filters.",
+    "app.projects.clearFilters": "Clear filters",
+    "app.projects.noResults": "No projects match your filters.",
+    "app.projects.searchPlaceholder": "Search projects, tech, keywords...",
 
     // Contact
     "app.contact.title": "Get In Touch",

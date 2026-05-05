@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FiArrowLeft } from "react-icons/fi";
+import { useIntl } from "react-intl";
+import { FiArrowLeft, FiSearch, FiX } from "react-icons/fi";
 import { useWebHaptics } from "web-haptics/react";
 import { PageLayout } from "@/components/layout";
 import { ProjectCard, ProjectCardSkeleton } from "@/components/projects";
@@ -25,12 +26,14 @@ interface Tech {
 export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   useDocumentTitle("Projects");
   const haptic = useWebHaptics();
+  const intl = useIntl();
 
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -68,7 +71,9 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const allTags = useMemo(() => {
+  const TOP_TAGS_COUNT = 5;
+
+  const topTags = useMemo(() => {
     const counts = new Map<string, number>();
     projects.forEach((p: { technologies?: Tech[] }) => {
       p.technologies?.forEach((t) => {
@@ -77,15 +82,34 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
     });
     return Array.from(counts.entries())
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .slice(0, TOP_TAGS_COUNT)
       .map(([name]) => name);
   }, [projects]);
 
   const filteredProjects = useMemo(() => {
-    if (activeTags.size === 0) return projects;
-    return projects.filter((p: { technologies?: Tech[] }) =>
-      p.technologies?.some((t) => activeTags.has(t.name))
-    );
-  }, [projects, activeTags]);
+    const q = query.trim().toLowerCase();
+    return projects.filter((p: { name?: string; description?: string; technologies?: Tech[] }) => {
+      if (activeTags.size > 0 && !p.technologies?.some((t) => activeTags.has(t.name))) {
+        return false;
+      }
+      if (q) {
+        const haystack = [
+          p.name ?? "",
+          p.description ?? "",
+          ...(p.technologies ?? []).map((t) => t.name),
+        ].join(" ").toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+      return true;
+    });
+  }, [projects, activeTags, query]);
+
+  const hasFilters = query.length > 0 || activeTags.size > 0;
+  const clearAll = () => {
+    haptic.trigger("light");
+    setQuery("");
+    setActiveTags(new Set());
+  };
 
   const toggleTag = (tag: string) => {
     haptic.trigger("light");
@@ -95,11 +119,6 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
       else next.add(tag);
       return next;
     });
-  };
-
-  const clearTags = () => {
-    haptic.trigger("light");
-    setActiveTags(new Set());
   };
 
   return (
@@ -160,11 +179,52 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
           </h1>
         </motion.div>
 
-        {/* Filter chips (skeleton placeholders during load to avoid layout shift) */}
-        <div className="flex flex-wrap items-center gap-1.5 justify-center mb-8 min-h-[28px]">
-          {loading ? (
-            <>
-              {[14, 20, 16, 24, 18, 22].map((w, i) => (
+        {/* Search + top tag chips */}
+        <div className="mb-8 max-w-md mx-auto space-y-3">
+          {/* Search input */}
+          <div className="relative">
+            <FiSearch
+              className={cn(
+                "absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4",
+                "text-charcoal/40 [html[data-theme='dark']_&]:text-sand/40"
+              )}
+            />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={intl.formatMessage({ id: "app.projects.searchPlaceholder" })}
+              aria-label={intl.formatMessage({ id: "app.projects.searchPlaceholder" })}
+              className={cn(
+                "w-full pl-9 pr-9 py-2 rounded-full text-sm",
+                "bg-white/40 [html[data-theme='dark']_&]:bg-white/5",
+                "border border-sand-dark/40 [html[data-theme='dark']_&]:border-white/10",
+                "text-charcoal placeholder:text-charcoal/40",
+                "[html[data-theme='dark']_&]:text-sand [html[data-theme='dark']_&]:placeholder:text-sand/40",
+                "focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/40",
+                "transition-colors"
+              )}
+            />
+            {hasFilters && (
+              <button
+                onClick={clearAll}
+                aria-label={intl.formatMessage({ id: "app.projects.clearFilters" })}
+                className={cn(
+                  "absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full",
+                  "text-charcoal/50 hover:text-charcoal hover:bg-charcoal/5",
+                  "[html[data-theme='dark']_&]:text-sand/50 [html[data-theme='dark']_&]:hover:text-sand [html[data-theme='dark']_&]:hover:bg-sand/5",
+                  "transition-colors"
+                )}
+              >
+                <FiX className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {/* Top tag chips (skeleton during load to avoid layout shift) */}
+          <div className="flex flex-wrap items-center gap-1.5 justify-center min-h-[26px]">
+            {loading ? (
+              [14, 20, 16, 24, 18].map((w, i) => (
                 <div
                   key={i}
                   className={cn(
@@ -177,28 +237,9 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
                   )}
                   style={{ width: `${w * 4}px` }}
                 />
-              ))}
-            </>
-          ) : !error && allTags.length > 0 ? (
-            <motion.div
-              className="flex flex-wrap items-center gap-1.5 justify-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
-            >
-              {activeTags.size > 0 && (
-                <button
-                  onClick={clearTags}
-                  className={cn(
-                    "text-xs font-medium px-2.5 py-1 rounded-full",
-                    "text-charcoal-light hover:text-charcoal transition-colors",
-                    "[html[data-theme='dark']_&]:text-sand/60 [html[data-theme='dark']_&]:hover:text-sand"
-                  )}
-                >
-                  {translate("app.projects.clearFilters")}
-                </button>
-              )}
-              {allTags.map((tag) => {
+              ))
+            ) : (
+              topTags.map((tag) => {
                 const active = activeTags.has(tag);
                 return (
                   <button
@@ -212,9 +253,9 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
                     </Badge>
                   </button>
                 );
-              })}
-            </motion.div>
-          ) : null}
+              })
+            )}
+          </div>
         </div>
 
         {/* Content */}

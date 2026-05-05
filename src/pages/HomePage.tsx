@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ProfileSection, SocialGrid, FeaturedLinks } from "@/components/home";
-import { ThemeToggle, LanguageToggle } from "@/components/shared";
+import { ThemeToggle, LanguageToggle, LastShipped } from "@/components/shared";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import translate from "@/i18n/translate";
 import { cn } from "@/lib/utils";
@@ -53,11 +53,15 @@ export const HomePage = ({ locale, onLocaleChange }: HomePageProps) => {
             className={cn(
               "text-[10px] tracking-wide",
               "text-charcoal/55 [html[data-theme='dark']_&]:text-sand/55",
-              "flex items-center justify-center gap-1"
+              "flex items-center justify-center gap-1.5 flex-wrap"
             )}
           >
-            {translate("app.footer.madeInCanada")} <span>🇨🇦</span>
-            <span className="mx-1">·</span>
+            <LastShipped />
+            <span className="mx-0.5">·</span>
+            <span className="inline-flex items-center gap-1">
+              {translate("app.footer.madeInCanada")} <span>🇨🇦</span>
+            </span>
+            <span className="mx-0.5">·</span>
             <a
               href="https://m19.ca"
               target="_blank"
