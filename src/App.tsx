@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import "@/styles/main.css";
@@ -182,6 +183,7 @@ const App = () => {
         </Routes>
       </AnimatePresence>
       <CookieBanner />
+      <Analytics />
     </I18nProvider>
   );
 };
