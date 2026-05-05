@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { useWebHaptics } from "web-haptics/react";
 import { PageLayout } from "@/components/layout";
-import { ProjectCard } from "@/components/projects";
-import { LoadingSpinner, ThemeToggle, LanguageToggle } from "@/components/shared";
+import { ProjectCard, ProjectCardSkeleton } from "@/components/projects";
+import { ThemeToggle, LanguageToggle } from "@/components/shared";
+import { Badge } from "@/components/ui";
 import { getProjectsCache } from "@/lib/projectsCache";
 import translate from "@/i18n/translate";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
@@ -16,6 +17,11 @@ interface ProjectsPageProps {
   onLocaleChange: (locale: string) => void;
 }
 
+interface Tech {
+  id: string | number;
+  name: string;
+}
+
 export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   useDocumentTitle("Projects");
   const haptic = useWebHaptics();
@@ -24,6 +30,7 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -60,6 +67,40 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  const allTags = useMemo(() => {
+    const counts = new Map<string, number>();
+    projects.forEach((p: { technologies?: Tech[] }) => {
+      p.technologies?.forEach((t) => {
+        counts.set(t.name, (counts.get(t.name) ?? 0) + 1);
+      });
+    });
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([name]) => name);
+  }, [projects]);
+
+  const filteredProjects = useMemo(() => {
+    if (activeTags.size === 0) return projects;
+    return projects.filter((p: { technologies?: Tech[] }) =>
+      p.technologies?.some((t) => activeTags.has(t.name))
+    );
+  }, [projects, activeTags]);
+
+  const toggleTag = (tag: string) => {
+    haptic.trigger("light");
+    setActiveTags((prev) => {
+      const next = new Set(prev);
+      if (next.has(tag)) next.delete(tag);
+      else next.add(tag);
+      return next;
+    });
+  };
+
+  const clearTags = () => {
+    haptic.trigger("light");
+    setActiveTags(new Set());
+  };
 
   return (
     <>
@@ -102,63 +143,109 @@ export const ProjectsPage = ({ locale, onLocaleChange }: ProjectsPageProps) => {
         {/* Spacer for fixed header */}
         <div className="h-14" />
 
-      {/* Title */}
-      <motion.div
-        className="text-center mb-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-      >
-        <h1
-          className={cn(
-            "text-3xl sm:text-4xl font-display font-bold mb-2",
-            "text-charcoal [html[data-theme='dark']_&]:text-sand"
-          )}
-        >
-          {translate("app.nav.projects")}
-        </h1>
-      </motion.div>
-
-      {/* Content */}
-      {loading ? (
-        <div className="flex flex-col items-center justify-center py-16">
-          <LoadingSpinner size="lg" />
-          <p
-            className={cn(
-              "mt-4 text-sm",
-              "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
-            )}
-          >
-            {translate("app.loading")}
-          </p>
-        </div>
-      ) : error ? (
+        {/* Title */}
         <motion.div
-          className="text-center py-16"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
         >
-          <p
+          <h1
             className={cn(
-              "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
+              "text-3xl sm:text-4xl font-display font-bold mb-2",
+              "text-charcoal [html[data-theme='dark']_&]:text-sand"
             )}
           >
-            {translate("app.loading.error", { br: <br /> })}
-          </p>
+            {translate("app.nav.projects")}
+          </h1>
         </motion.div>
-      ) : (
-        <div className="space-y-6">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              locale={locale}
-              index={index}
-            />
-          ))}
-        </div>
-      )}
-    </PageLayout>
+
+        {/* Filter chips */}
+        {!loading && !error && allTags.length > 0 && (
+          <motion.div
+            className="flex flex-wrap items-center gap-1.5 justify-center mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            {activeTags.size > 0 && (
+              <button
+                onClick={clearTags}
+                className={cn(
+                  "text-xs font-medium px-2.5 py-1 rounded-full",
+                  "text-charcoal-light hover:text-charcoal transition-colors",
+                  "[html[data-theme='dark']_&]:text-sand/60 [html[data-theme='dark']_&]:hover:text-sand"
+                )}
+              >
+                {translate("app.projects.clearFilters")}
+              </button>
+            )}
+            {allTags.map((tag) => {
+              const active = activeTags.has(tag);
+              return (
+                <button
+                  key={tag}
+                  onClick={() => toggleTag(tag)}
+                  className="transition-transform active:scale-95"
+                  aria-pressed={active}
+                >
+                  <Badge variant={active ? "accent" : "default"} size="sm">
+                    {tag}
+                  </Badge>
+                </button>
+              );
+            })}
+          </motion.div>
+        )}
+
+        {/* Content */}
+        {loading ? (
+          <div className="space-y-6">
+            {[0, 1, 2].map((i) => (
+              <ProjectCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : error ? (
+          <motion.div
+            className="text-center py-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <p
+              className={cn(
+                "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
+              )}
+            >
+              {translate("app.loading.error", { br: <br /> })}
+            </p>
+          </motion.div>
+        ) : filteredProjects.length === 0 ? (
+          <motion.div
+            className="text-center py-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <p
+              className={cn(
+                "text-charcoal-light [html[data-theme='dark']_&]:text-sand/60"
+              )}
+            >
+              {translate("app.projects.noResults")}
+            </p>
+          </motion.div>
+        ) : (
+          <div className="space-y-6">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                locale={locale}
+                index={index}
+              />
+            ))}
+          </div>
+        )}
+      </PageLayout>
     </>
   );
 };

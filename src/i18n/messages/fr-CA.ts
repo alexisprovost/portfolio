@@ -34,6 +34,8 @@ export default {
     "app.project.showLess": "Afficher moins",
     "app.project.showDescription": "Voir la description",
     "app.project.hideDescription": "Masquer la description",
+    "app.projects.clearFilters": "Effacer",
+    "app.projects.noResults": "Aucun projet ne correspond aux filtres sélectionnés.",
 
     // Contact
     "app.contact.title": "Me Contacter",

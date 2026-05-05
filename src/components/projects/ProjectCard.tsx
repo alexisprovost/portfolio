@@ -118,9 +118,12 @@ export const ProjectCard = ({ project, locale, index }: ProjectCardProps) => {
                 className="w-full h-full border-0"
               />
             ) : img ? (
-              <div
-                className="w-full h-full bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${img})` }}
+              <img
+                src={img}
+                alt={name}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
               />
             ) : (
               <div
